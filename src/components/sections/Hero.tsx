@@ -1,4 +1,5 @@
 import { site } from "@/lib/data";
+import { Typewriter } from "../ui/Typewriter";
 
 const chipPositions = [
   "left-[6%] top-[18%]",
@@ -32,12 +33,17 @@ export function Hero() {
           {site.availability}
         </p>
 
-        <h1 className="animate-rise mt-8 text-6xl font-bold leading-[1.02] tracking-tight text-ink md:text-8xl [--rise-delay:100ms]">
+        <h1 className="animate-rise mt-8 text-6xl font-bold leading-[1.02] tracking-tight text-ink md:whitespace-nowrap md:text-8xl [--rise-delay:100ms]">
           {site.firstName} <span className="gradient-text">{site.lastName}</span>
         </h1>
 
-        <p className="animate-rise mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted md:text-2xl md:leading-relaxed [--rise-delay:200ms]">
-          <span className="font-semibold text-ink">✦ {site.role}</span> — {site.tagline}
+        <p className="animate-rise mt-7 flex items-center justify-center gap-2 text-xl font-semibold text-ink md:text-3xl [--rise-delay:180ms]">
+          <span className="text-indigo">✦</span>
+          <Typewriter phrases={["Frontend Developer", "React & Next.js Developer", "E-commerce frontend"]} />
+        </p>
+
+        <p className="animate-rise mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-xl md:leading-relaxed [--rise-delay:240ms]">
+          {site.tagline}
         </p>
 
         <div className="animate-rise mt-10 flex flex-wrap items-center justify-center gap-4 [--rise-delay:300ms]">

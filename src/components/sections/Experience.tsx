@@ -6,7 +6,7 @@ export function Experience() {
   return (
     <section id="experience" className="scroll-mt-24 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <SectionHeader label="Experience" title="Where I've built things." />
+        <SectionHeader label="Experience" title="Work experience." />
         <div className="relative mt-12">
           {/* center line */}
           <div

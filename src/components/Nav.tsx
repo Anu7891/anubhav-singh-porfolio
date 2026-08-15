@@ -37,10 +37,7 @@ export function Nav() {
           <span className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-indigo to-cyan text-xs font-bold text-white">
             {site.initials}
           </span>
-          <span className="text-[15px] font-semibold text-ink">
-            {site.firstName.toLowerCase()}
-            <span className="text-muted">.dev</span>
-          </span>
+          <span className="text-[15px] font-semibold text-ink">{site.name}</span>
         </a>
 
         <ul className="hidden items-center gap-1 lg:flex">

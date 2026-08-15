@@ -51,10 +51,10 @@ export function Contact() {
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           label="Contact"
-          title="Let's build something."
-          subtitle="I'm open to senior frontend roles and selective freelance work. I reply within a day."
+          title="Let's work together."
+          subtitle="I'm open to frontend roles and freelance work. I usually reply within a day."
         />
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.6fr]">
+        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.6fr]">
           <ul className="space-y-4">
             {channels.map((c, i) => {
               const inner = (

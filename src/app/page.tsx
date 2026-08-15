@@ -10,6 +10,7 @@ import { Experience } from "@/components/sections/Experience";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
 import { Stats } from "@/components/sections/Stats";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 
 export default function Home() {
@@ -19,12 +20,15 @@ export default function Home() {
       <Nav />
       <CommandPalette />
       <main id="main">
+        {/* Hero → About → Work Experience → Projects → Skills →
+            Achievements → Testimonials → Contact → Footer */}
         <Hero />
         <About />
         <Experience />
-        <Skills />
         <Projects />
+        <Skills />
         <Stats />
+        <Testimonials />
         <Contact />
       </main>
       <Footer />

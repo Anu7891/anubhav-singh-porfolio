@@ -1,7 +1,8 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { SectionHeader } from "../ui/SectionHeader";
 import { Reveal } from "../ui/Reveal";
-import { coreSkills, skillHighlights, skillCategories } from "@/lib/data";
+import { TechMarquee } from "../ui/TechMarquee";
+import { skillCategories } from "@/lib/data";
 
 const icons: Record<string, ReactNode> = {
   code: (
@@ -53,44 +54,15 @@ export function Skills() {
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           label="Skills"
-          title="The full stack I build with."
-          subtitle="Every tool below is drawn from real production work across four e-commerce platforms — not a wishlist."
+          title="Tools I work with."
+          subtitle="Technologies I've used across commerce projects at 3Embed."
         />
 
-        <div className="mt-12 grid gap-4 md:grid-cols-2">
-          <Reveal>
-            <div className="h-full rounded-3xl border border-line bg-panel p-6 md:p-7">
-              <p className="mb-5 font-mono text-xs tracking-[0.08em] text-muted">CORE PROFICIENCY</p>
-              {coreSkills.map((s) => (
-                <div key={s.name} className="mb-4 last:mb-0">
-                  <div className="mb-2 flex items-center justify-between text-sm text-ink">
-                    <span>{s.name}</span>
-                    <span className="font-mono text-xs text-muted">{s.level}</span>
-                  </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
-                    <div className="bar-fill h-full rounded-full" style={{ "--bar-w": `${s.level}%` } as CSSProperties} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
+        <Reveal className="mt-12">
+          <TechMarquee />
+        </Reveal>
 
-          <Reveal delay={80}>
-            <div className="flex h-full flex-col justify-center gap-4 rounded-3xl border border-line bg-panel p-6 md:p-7">
-              <p className="font-mono text-xs tracking-[0.08em] text-muted">HIGHLIGHTS</p>
-              <p className="leading-relaxed text-muted">{skillHighlights.body}</p>
-              <ul className="flex flex-wrap gap-2">
-                {skillHighlights.pills.map((p) => (
-                  <li key={p} className="rounded-lg border border-line bg-panel-strong px-3 py-1.5 text-sm text-ink">
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        </div>
-
-        <div className="mt-4 grid gap-4 md:grid-cols-2">
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
           {skillCategories.map((c, i) => (
             <Reveal key={c.title} delay={(i % 2) * 80}>
               <div className="h-full rounded-3xl border border-line bg-panel p-6 transition-colors hover:border-indigo/30">

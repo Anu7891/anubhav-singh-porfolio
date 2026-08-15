@@ -3,6 +3,7 @@ import { Reveal } from "../ui/Reveal";
 import { testimonials } from "@/lib/data";
 
 export function Testimonials() {
+  if (testimonials.length === 0) return null;
   return (
     <section id="testimonials" className="scroll-mt-24 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">

@@ -13,7 +13,7 @@ export function SectionHeader({ label, title, subtitle }: SectionHeaderProps) {
         {title}
       </h2>
       {subtitle ? (
-        <p className="mx-auto mt-3 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
+        <p className="mx-auto mt-3 max-w-4xl text-lg leading-relaxed text-muted md:text-xl">
           {subtitle}
         </p>
       ) : null}

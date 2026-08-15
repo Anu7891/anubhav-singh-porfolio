@@ -11,9 +11,9 @@
 
 [data-theme="light"] {
   --bg: #fafaf9;
-  --ink: #111113;
-  --muted: #57575e;
-  --line: rgba(0, 0, 0, 0.09);
+  --ink: #0d0d0f;
+  --muted: #45454d;
+  --line: rgba(0, 0, 0, 0.12);
   --panel: rgba(0, 0, 0, 0.03);
   --panel-strong: rgba(0, 0, 0, 0.05);
 }
@@ -169,4 +169,119 @@ body {
 .thumb-slot .t { font-size: 9.5px; color: var(--muted); font-family: var(--font-mono); letter-spacing: 0.03em; }
 .thumb-img { aspect-ratio: 4 / 3; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 9px; border: 1px solid var(--line); cursor: zoom-in; }
 .lightbox { position: fixed; inset: 0; z-index: 60; background: rgba(4, 4, 8, 0.94); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 40px; cursor: zoom-out; }
-@media (prefers-reduced-motion: reduce) { .browser-frame { transform: none; } }
+
+/* ---- macOS-style project overview window ---- */
+.macwin-backdrop {
+  position: fixed; inset: 0; z-index: 55;
+  background: rgba(4, 4, 8, 0.72);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  animation: macwin-fade 0.2s ease;
+}
+.macwin {
+  display: flex; flex-direction: column;
+  width: min(920px, 100%);
+  max-height: min(88vh, 820px);
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--bg, #0d0d15);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  transform-origin: center;
+  animation: macwin-pop 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.macwin-bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.macwin-lights { display: flex; align-items: center; gap: 8px; }
+.macwin-light {
+  width: 12px; height: 12px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; padding: 0;
+}
+.macwin-light.red { background: #ff5f57; cursor: pointer; }
+.macwin-light.yellow { background: #febc2e; }
+.macwin-light.green { background: #28c840; }
+.macwin-light.red svg { opacity: 0; transition: opacity 0.15s; }
+.macwin-lights:hover .macwin-light.red svg { opacity: 1; }
+.macwin-title {
+  flex: 1; text-align: center;
+  font-family: var(--font-mono);
+  font-size: 12px; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.macwin-open {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 600; color: var(--muted);
+  padding: 4px 10px; border-radius: 7px;
+  border: 1px solid var(--line);
+  transition: 0.2s;
+}
+.macwin-open:hover { color: var(--ink); border-color: rgba(99, 102, 241, 0.5); }
+.macwin-body { overflow-y: auto; overscroll-behavior: contain; }
+.macwin-hero {
+  width: 100%; display: block;
+  aspect-ratio: 16 / 8.6; object-fit: cover; object-position: top;
+  background: #0d0d15; cursor: zoom-in;
+  border-bottom: 1px solid var(--line);
+}
+.macwin-content { padding: 28px 30px 30px; }
+@media (min-width: 768px) { .macwin-content { padding: 34px 40px 40px; } }
+
+/* ---- Typewriter caret ---- */
+.tw-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 3px;
+  background: var(--color-indigo, #6366f1);
+  vertical-align: -0.14em;
+  animation: tw-blink 1s steps(1) infinite;
+}
+@keyframes tw-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .tw-caret { animation: none; } }
+
+/* ---- Tech stack marquee ---- */
+.tech-marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 6px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.tech-track {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: max-content;
+  animation: tech-scroll 34s linear infinite;
+}
+.tech-marquee:hover .tech-track { animation-play-state: paused; }
+.tech-tile {
+  flex: 0 0 auto;
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+  transition: transform 0.2s, border-color 0.2s;
+}
+.tech-tile:hover { transform: translateY(-3px); border-color: rgba(99, 102, 241, 0.4); }
+.tech-tile svg { width: 30px; height: 30px; }
+@keyframes tech-scroll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .tech-track { animation: none; } }
+
+@keyframes macwin-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes macwin-pop { from { opacity: 0; transform: scale(0.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .browser-frame { transform: none; }
+  .macwin-backdrop, .macwin { animation: none; }
+}

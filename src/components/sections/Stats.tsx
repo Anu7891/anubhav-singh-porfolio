@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { stats } from "@/lib/data";
+import { Reveal } from "../ui/Reveal";
+import { stats, achievements } from "@/lib/data";
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -39,10 +40,19 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   );
 }
 
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} width={13} height={13} aria-hidden="true">
+      <path d="m5 13 4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function Stats() {
   return (
-    <section className="py-8" aria-label="Career statistics">
+    <section id="achievements" aria-label="Achievements & impact" className="scroll-mt-24 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
+        {/* Counters */}
         <div className="grid grid-cols-2 gap-10 rounded-3xl border border-line bg-panel px-8 py-8 text-center lg:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label}>
@@ -53,6 +63,25 @@ export function Stats() {
             </div>
           ))}
         </div>
+
+        {/* Key achievements */}
+        <Reveal>
+          <div className="mt-4 rounded-3xl border border-line bg-panel p-7 md:p-10">
+            <h2 className="text-center text-2xl font-bold tracking-tight text-ink md:text-3xl">
+              Key achievements
+            </h2>
+            <ul className="mx-auto mt-8 grid max-w-4xl gap-x-10 gap-y-5 sm:grid-cols-2">
+              {achievements.map((a) => (
+                <li key={a} className="flex gap-3 leading-relaxed text-ink/90">
+                  <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full border border-line bg-panel-strong text-cyan">
+                    <CheckIcon />
+                  </span>
+                  {a}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

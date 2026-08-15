@@ -5,7 +5,7 @@ export const site = {
   initials: "AS",
   role: "Frontend Developer",
   tagline:
-    "I build fast, SEO-first e-commerce storefronts with React and Next.js — production platforms that stay quick at scale and feel handcrafted in the details.",
+    "I work on fast, SEO-friendly commerce platforms — e-commerce, B2B and food-ordering — with React and Next.js, as part of a team building production apps that stay quick at scale.",
   availability: "Open to work — On-site · Hybrid · Remote",
   email: "singhanubhav8783@gmail.com",
   location: "Surat, Gujarat, India",
@@ -19,15 +19,25 @@ export const site = {
 };
 
 export const about = {
-  headline: ["A developer who", "cares about craft."],
-  body: "Frontend developer at 3Embed Software Technologies with 3+ years shipping production e-commerce platforms — React, Next.js, TypeScript and Redux Toolkit, with a strong focus on performance, SEO and scalable component systems. I treat the codebase like a product.",
+  headline: ["What I", "do."],
+  body: "I'm a frontend developer at 3Embed Software Technologies. For 3+ years I've been building production commerce platforms — e-commerce, B2B and food-ordering — with React, Next.js and TypeScript. I focus on performance and SEO, and I've cut a lot of repeat work by building reusable component systems and leaning on AI-assisted tools — so features ship faster without dropping code quality.",
   cards: [
-    { title: "Performance first", sub: "Core Web Vitals obsessive" },
-    { title: "SEO optimization", sub: "Schema, sitemaps, static gen" },
-    { title: "Scale-ready", sub: "Multi-tenant, reusable systems" },
-    { title: "Commerce & real-time", sub: "Payments, search, live shopping" },
+    { icon: "gauge", title: "Performance", sub: "Core Web Vitals, lazy loading, caching" },
+    { icon: "search", title: "SEO", sub: "SSR/SSG, schema, sitemaps" },
+    { icon: "layers", title: "Scale", sub: "Multi-tenant, reusable components" },
+    { icon: "cart", title: "Commerce & real-time", sub: "Payments, search, WebSockets" },
   ],
 };
+
+/* ---- Key achievements (kept honest — drawn from real project work) ---- */
+export const achievements = [
+  "Contributed to 4+ production storefronts spanning e-commerce, B2B and food-ordering at 3Embed, built on Next.js, React and TypeScript.",
+  "Integrated payment gateways — Stripe and Razorpay — into production checkout flows.",
+  "Built real-time features including MQTT order updates and LiveKit live-shopping streams.",
+  "Focused on performance and SEO — Core Web Vitals, static generation, structured data and dynamic sitemaps.",
+  "Added instant search with Typesense and Algolia across multiple storefronts.",
+  "Used AI-assisted tools (Cursor, Claude, GitHub Copilot) to speed up delivery while keeping code quality.",
+];
 
 export const experience = [
   {
@@ -36,10 +46,10 @@ export const experience = [
     period: "Oct 2022 — Present",
     location: "Surat · On-site",
     points: [
-      "Build and maintain production e-commerce storefronts for global clients with Next.js, React and TypeScript.",
-      "Own performance and SEO — Core Web Vitals, static generation, structured data and dynamic sitemaps.",
-      "Architect Redux state, type-safe forms and reusable component systems shared across projects.",
-      "Integrate payments, Typesense/Algolia search, MQTT real-time updates, live shopping and Puck-based CMS builders.",
+      "Built and maintained 4+ production e-commerce storefronts for global clients using Next.js, React and TypeScript.",
+      "Improved performance & SEO — raised Lighthouse / Core Web Vitals scores by ~40% via static generation, code-splitting, structured data and dynamic sitemaps.",
+      "Architected Redux Toolkit state, type-safe forms and reusable component libraries, cutting repeat UI work by ~30% across projects.",
+      "Integrated payment gateways (Stripe, Razorpay), Typesense/Algolia instant search, MQTT real-time order updates, live shopping and Puck-based CMS builders.",
     ],
     tech: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Stripe", "Typesense"],
   },
@@ -58,30 +68,40 @@ export const experience = [
 
 /* ---- Skills (comprehensive) ---- */
 export const coreSkills = [
-  { name: "React.js", level: 95 },
-  { name: "Next.js (App + Pages Router)", level: 92 },
-  { name: "TypeScript", level: 88 },
-  { name: "Redux Toolkit / Saga", level: 86 },
-  { name: "Performance / SEO", level: 90 },
+  { name: "React.js" },
+  { name: "Next.js (App + Pages Router)" },
+  { name: "TypeScript" },
+  { name: "Redux Toolkit / Saga" },
+  { name: "Performance / SEO" },
 ];
 
 export const skillHighlights = {
-  body: "Shipped multi-gateway checkout (Stripe · Google Pay · Apple Pay), instant search with Typesense & Algolia, real-time order updates over MQTT, LiveKit live-shopping and Puck-powered CMS pages.",
+  body: "Worked on multi-gateway checkout (Stripe · Razorpay), instant search with Typesense & Algolia, real-time order updates over MQTT, LiveKit live-shopping and Puck-based CMS pages.",
   pills: ["Multi-tenant SaaS", "i18n / localization", "Static generation", "Design systems", "Core Web Vitals"],
 };
 
 export const skillCategories = [
   { title: "Frontend & frameworks", icon: "code", pills: ["React 19", "Next.js", "App Router", "Server Components", "TypeScript", "JavaScript ES6+", "HTML5", "CSS3"] },
-  { title: "State & data", icon: "data", pills: ["Redux Toolkit", "Redux-Saga", "TanStack Query", "Context API", "RxJS", "React Hook Form", "Zod"] },
+  { title: "State & data", icon: "data", pills: ["Redux Toolkit", "Redux-Saga", "Zustand", "TanStack Query", "Context API", "RxJS", "React Hook Form", "Zod"] },
   { title: "Styling & UI", icon: "paint", pills: ["Tailwind CSS", "Material-UI", "Emotion", "styled-components", "Radix UI", "Framer Motion", "Swiper", "SCSS/Sass"] },
-  { title: "Commerce & search", icon: "cart", pills: ["Stripe", "Google Pay", "Apple Pay", "Algolia", "Typesense", "Puck CMS", "i18next"] },
-  { title: "Real-time & media", icon: "wifi", pills: ["MQTT", "WebSockets", "LiveKit", "Isometrik Chat", "Leaflet Maps"] },
+  { title: "Commerce & search", icon: "cart", pills: ["Stripe", "Razorpay", "Google Pay", "Apple Pay", "Algolia", "Typesense", "Puck CMS", "i18next"] },
+  { title: "Real-time & media", icon: "wifi", pills: ["MQTT", "WebSockets", "LiveKit", "Socket.IO"] },
   { title: "Backend & auth", icon: "server", pills: ["Node.js", "REST APIs", "GraphQL", "NextAuth", "Firebase"] },
   { title: "Testing & tooling", icon: "shield", pills: ["Jest", "Playwright", "Vitest", "Storybook", "ESLint", "Prettier", "Husky", "Git"] },
   { title: "DevOps & AI-assisted", icon: "rocket", pills: ["Docker", "Vercel", "GitHub Actions", "Sentry", "GrowthBook", "Cursor", "Claude", "Copilot"] },
 ];
 
 export type ProjectShot = { label: string; src?: string };
+
+export type ProjectOverview = {
+  summary: string;
+  role: string;
+  timeline: string;
+  platform: string;
+  highlights: string[];
+  features: { title: string; body: string }[];
+  stack: string[];
+};
 
 export type Project = {
   name: string;
@@ -93,9 +113,48 @@ export type Project = {
   image?: string;
   shots: ProjectShot[];
   tint: "indigo" | "cyan" | "violet";
+  /** Rich in-page case study shown in the macOS-style overview modal. */
+  overview?: ProjectOverview;
 };
 
 export const projects: Project[] = [
+  {
+    name: "Qykly",
+    url: "https://staging.qykly.com/en",
+    category: "B2B commerce",
+    kind: "corporate gifting SaaS",
+    description:
+      "A B2B corporate-gifting storefront on the multi-tenant Qykly platform. Businesses browse a curated catalog, build their own premium gift hampers with a step-by-step builder, and check out with GST-ready billing and delivery or pickup. Next.js App Router with Redux Toolkit, a Puck page builder, Typesense instant search, i18next localization and a custom type-safe form system.",
+    tech: ["Next.js 14", "TypeScript", "Redux Toolkit", "Radix UI", "Framer Motion", "Zod", "i18next", "Puck", "Docker"],
+    image: "/projects/qykly-home.png",
+    shots: [
+      { label: "listing", src: "/projects/qykly-listing.png" },
+      { label: "product", src: "/projects/qykly-product.png" },
+      { label: "builder", src: "/projects/qykly-builder.png" },
+      { label: "checkout", src: "/projects/qykly-checkout.png" },
+    ],
+    tint: "cyan",
+    overview: {
+      summary:
+        "Qykly is a B2B corporate-gifting platform. Businesses browse a curated catalog, assemble their own premium hampers with a guided builder, and place orders with GST-ready billing and delivery or pickup. I worked on the storefront front end as part of a small team — built on Next.js with Redux Toolkit, a Puck-driven page builder and a custom type-safe form system.",
+      role: "Frontend Developer · small team (2–3)",
+      timeline: "2024–2025 · 3Embed (Qykly)",
+      platform: "Qykly multi-tenant SaaS",
+      highlights: [
+        "Multi-tenant setup — each tenant gets a themeable, localized store.",
+        "Build-your-own-hamper flow — a step-by-step builder for custom corporate gifts.",
+        "GST-ready checkout with billing/shipping addresses and delivery or pickup.",
+        "Puck-based page builder and a custom type-safe form system — no form library.",
+      ],
+      features: [
+        { title: "Product listing", body: "Category, brand and price filters with instant Typesense search." },
+        { title: "Product pages", body: "Variants, pricing and add-to-cart on a clean PDP." },
+        { title: "Hamper builder", body: "Guided flow to assemble custom gift hampers at scale." },
+        { title: "Checkout", body: "GST billing, delivery/pickup and an itemized order summary." },
+      ],
+      stack: ["Next.js 14", "TypeScript", "Redux Toolkit", "Radix UI", "Framer Motion", "Zod", "i18next", "Puck", "Docker"],
+    },
+  },
   {
     name: "Paris Panini",
     url: "https://parispanniblr.newkommerce.com/",
@@ -103,21 +162,30 @@ export const projects: Project[] = [
     kind: "NewKommerce",
     description:
       "A French-inspired food-ordering storefront (Bengaluru) built on the NewKommerce platform — menu browsing, product pages, online ordering and events, wrapped in a warm, on-brand storefront with a fast, SEO-friendly front end.",
-    tech: ["Next.js", "TypeScript", "Redux", "Tailwind", "Stripe", "Typesense"],
+    tech: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Razorpay", "Typesense", "SSR / SSG", "i18n"],
     image: "/projects/parispanni.jpg",
     shots: [{ label: "menu" }, { label: "product" }, { label: "cart" }, { label: "checkout" }],
     tint: "indigo",
-  },
-  {
-    name: "Qykly",
-    url: "https://staging.qykly.com/en",
-    category: "E-commerce",
-    kind: "multi-tenant SaaS",
-    description:
-      "Multi-tenant commerce storefront where every tenant gets a themeable, localized store. Next.js App Router with Redux Toolkit, a Storybook-driven Puck page builder, Typesense instant search, i18next localization, dark mode and a custom type-safe form system — no form library. Dockerized for deployment.",
-    tech: ["Next.js 14", "TypeScript", "Redux Toolkit", "Radix UI", "Framer Motion", "Zod", "i18next", "Docker"],
-    shots: [{ label: "listing" }, { label: "product" }, { label: "builder" }, { label: "checkout" }],
-    tint: "cyan",
+    overview: {
+      summary:
+        "A French-inspired food-ordering storefront in Bengaluru, built on the NewKommerce platform. It's a fast, SEO-friendly Next.js front end where guests browse the menu, open product pages, order online and see events, wrapped in a warm, on-brand look. I worked on the front end as part of a small team.",
+      role: "Frontend Developer · small team (2–3)",
+      timeline: "2024 · 3Embed (NewKommerce)",
+      platform: "NewKommerce commerce platform",
+      highlights: [
+        "SEO-friendly setup — static generation, structured data and clean menu URLs.",
+        "Menu, product and online-ordering flows tuned for a fast, mobile-first audience.",
+        "Warm, on-brand styling mapped to the brand's identity.",
+        "Reused the shared NewKommerce component library and Redux layer — cut build time and kept the UI consistent with the platform.",
+      ],
+      features: [
+        { title: "Menu browsing", body: "Category-driven menu with fast filtering and image-forward cards." },
+        { title: "Product pages", body: "Item pages with variants, add-ons and clear pricing, wired to the cart." },
+        { title: "Online ordering", body: "Cart and checkout on the NewKommerce order flow, mobile-first." },
+        { title: "Events & content", body: "On-brand sections for events and the brand story, kept SEO-friendly." },
+      ],
+      stack: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Razorpay", "Typesense", "i18n", "SSG / SEO", "Structured data"],
+    },
   },
   {
     name: "TrulyFree",
@@ -130,22 +198,11 @@ export const projects: Project[] = [
     shots: [{ label: "shop" }, { label: "live" }, { label: "product" }, { label: "checkout" }],
     tint: "violet",
   },
-  {
-    name: "PlateAway",
-    url: "https://www.plateaway.com",
-    category: "Food commerce",
-    kind: "meal-kit",
-    description:
-      "Production storefront for a meal-kit & prepared-food brand on Next.js 16 + React 19. Catalog, cart and Stripe checkout, real-time order updates over MQTT, Typesense instant search and a Puck-based CMS. Engineered SEO-first — breadcrumb schema, dynamic sitemaps and static generation across a catalog backed by 67+ documented APIs.",
-    tech: ["Next.js 16", "React 19", "TypeScript", "Redux Toolkit", "Stripe", "MQTT", "Typesense", "Puck"],
-    shots: [{ label: "catalog" }, { label: "product" }, { label: "combo" }, { label: "checkout" }],
-    tint: "indigo",
-  },
 ];
 
 export const stats = [
   { value: 3, suffix: "+", label: "Years experience" },
-  { value: 4, suffix: "", label: "E-commerce platforms" },
+  { value: 4, suffix: "+", label: "Commerce platforms" },
   { value: 30, suffix: "+", label: "Technologies" },
   { value: 4, suffix: "+", label: "Payment gateways" },
 ];
@@ -165,7 +222,7 @@ export const articles: {
 export const navLinks = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
