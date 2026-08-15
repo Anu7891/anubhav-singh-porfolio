@@ -6,10 +6,10 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 
 const title = "Anubhav Singh — Frontend Developer";
 const description =
-  "Frontend developer at 3Embed Software Technologies. I build fast, SEO-first e-commerce storefronts with React, Next.js, TypeScript and Redux — production platforms like PlateAway and Qykly that stay quick at scale.";
+  "E-commerce frontend developer — React, Next.js & TypeScript. 3+ years at 3Embed shipping fast, SEO-first production storefronts: Paris Panini, Qykly, TrulyFree, PlateAway.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://anubhavsingh.dev"),
+  metadataBase: new URL("https://anubhav-singh-porfolio.vercel.app"),
   title: {
     default: title,
     template: "%s · Anubhav Singh",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title,
     description,
     type: "website",
-    url: "https://anubhavsingh.dev",
+    url: "https://anubhav-singh-porfolio.vercel.app",
     siteName: "Anubhav Singh — Portfolio",
     locale: "en_US",
   },
