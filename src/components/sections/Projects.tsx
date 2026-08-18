@@ -47,7 +47,7 @@ function ExpandIcon() {
   );
 }
 
-function Visual({ p, onOpen }: { p: Project; onOpen: (src: string) => void }) {
+function Visual({ p, onOpen }: { p: Project; onOpen: (src: string, label: string) => void }) {
   return (
     <div className="proj-visual" style={{ "--tint-a": tintA[p.tint], "--tint-b": tintB[p.tint] } as CSSProperties}>
       <div className="browser-frame">
@@ -59,7 +59,7 @@ function Visual({ p, onOpen }: { p: Project; onOpen: (src: string) => void }) {
         </div>
         {p.image ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img className="shot-img" src={p.image} alt={`${p.name} screenshot`} loading="lazy" onClick={() => onOpen(p.image!)} />
+          <img className="shot-img" src={p.image} alt={`${p.name} screenshot`} loading="lazy" onClick={() => onOpen(p.image!, "Homepage")} />
         ) : (
           <div className="shot-ph">
             <span className="grid size-11 place-items-center rounded-xl border border-line bg-white/5">
@@ -83,7 +83,7 @@ function ChevronIcon({ dir }: { dir: "left" | "right" }) {
   );
 }
 
-function ThumbCarousel({ p, onOpen }: { p: Project; onOpen: (src: string) => void }) {
+function ThumbCarousel({ p, onOpen }: { p: Project; onOpen: (src: string, label: string) => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -118,7 +118,7 @@ function ThumbCarousel({ p, onOpen }: { p: Project; onOpen: (src: string) => voi
         {p.shots.map((s, i) =>
           s.src ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img key={i} className="thumb-img" src={s.src} alt={`${p.name} — ${s.label}`} title={prettyLabel(s.label)} loading="lazy" onClick={() => onOpen(s.src!)} />
+            <img key={i} className="thumb-img" src={s.src} alt={`${p.name} — ${s.label}`} title={prettyLabel(s.label)} loading="lazy" onClick={() => onOpen(s.src!, prettyLabel(s.label))} />
           ) : (
             <div key={i} className="thumb-slot" title={`Add ${s.label} screenshot`}>
               <PlusIcon />
@@ -197,7 +197,7 @@ const labelNames: Record<string, string> = {
 };
 const prettyLabel = (l: string) => labelNames[l] ?? l.charAt(0).toUpperCase() + l.slice(1);
 
-function Slider({ slides, alt, onOpen }: { slides: Slide[]; alt: string; onOpen: (src: string) => void }) {
+function Slider({ slides, alt, onOpen }: { slides: Slide[]; alt: string; onOpen: (src: string, label: string) => void }) {
   const [i, setI] = useState(0);
   const n = slides.length;
   const go = (d: number) => setI((v) => (v + d + n) % n);
@@ -205,7 +205,7 @@ function Slider({ slides, alt, onOpen }: { slides: Slide[]; alt: string; onOpen:
   return (
     <div className="macwin-slider">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="macwin-slide" src={slides[i].src} alt={`${alt} — ${slides[i].label}`} onClick={() => onOpen(slides[i].src)} />
+      <img className="macwin-slide" src={slides[i].src} alt={`${alt} — ${slides[i].label}`} onClick={() => onOpen(slides[i].src, slides[i].label)} />
       <span className="macwin-label">{slides[i].label}</span>
       {n > 1 ? (
         <>
@@ -227,7 +227,7 @@ function Slider({ slides, alt, onOpen }: { slides: Slide[]; alt: string; onOpen:
   );
 }
 
-function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => void; onOpenImage: (src: string) => void }) {
+function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => void; onOpenImage: (src: string, label: string) => void }) {
   const o = p.overview!;
   const gallery: Slide[] = [
     ...(p.image ? [{ src: p.image, label: "Homepage" }] : []),
@@ -334,19 +334,20 @@ function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => 
 }
 
 export function Projects() {
-  const [src, setSrc] = useState<string | null>(null);
+  const [zoom, setZoom] = useState<Slide | null>(null);
   const [active, setActive] = useState<Project | null>(null);
+  const openZoom = (src: string, label: string) => setZoom({ src, label });
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       // Close the topmost layer first: lightbox, then the modal.
-      if (src) setSrc(null);
+      if (zoom) setZoom(null);
       else if (active) setActive(null);
     };
     addEventListener("keydown", onKey);
     return () => removeEventListener("keydown", onKey);
-  }, [src, active]);
+  }, [zoom, active]);
 
   // Lock body scroll while the overview window is open.
   useEffect(() => {
@@ -373,7 +374,7 @@ export function Projects() {
               <Reveal key={p.name}>
                 <article className="group grid overflow-hidden rounded-3xl border border-line bg-panel transition-colors hover:border-indigo/40 md:grid-cols-2">
                   <div className={reversed ? "md:order-2" : ""}>
-                    <Visual p={p} onOpen={setSrc} />
+                    <Visual p={p} onOpen={openZoom} />
                   </div>
                   <Body p={p} index={i} onOpenOverview={setActive} />
                 </article>
@@ -383,12 +384,15 @@ export function Projects() {
         </div>
       </div>
 
-      {active ? <ProjectModal p={active} onClose={() => setActive(null)} onOpenImage={setSrc} /> : null}
+      {active ? <ProjectModal p={active} onClose={() => setActive(null)} onOpenImage={openZoom} /> : null}
 
-      {src ? (
-        <div className="lightbox" onClick={() => setSrc(null)} role="dialog" aria-modal="true" aria-label="Enlarged screenshot">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt="Enlarged screenshot" className="max-h-full max-w-full rounded-xl border border-line" />
+      {zoom ? (
+        <div className="lightbox" onClick={() => setZoom(null)} role="dialog" aria-modal="true" aria-label={`Enlarged — ${zoom.label}`}>
+          <figure className="lightbox-figure" onClick={(e) => e.stopPropagation()}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={zoom.src} alt={zoom.label} className="lightbox-img" />
+            <figcaption className="lightbox-cap">{zoom.label}</figcaption>
+          </figure>
         </div>
       ) : null}
     </section>

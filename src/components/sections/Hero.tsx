@@ -1,32 +1,9 @@
 import { site } from "@/lib/data";
 import { Typewriter } from "../ui/Typewriter";
 
-const chipPositions = [
-  "left-[5%] top-[20%]",
-  "right-[6%] top-[24%]",
-  "left-[9%] top-[44%]",
-  "right-[7%] top-[48%]",
-  "left-[7%] bottom-[20%]",
-  "right-[6%] bottom-[24%]",
-  "left-[44%] top-[6%]",
-  "right-[16%] top-[13%]",
-];
-
 export function Hero() {
   return (
     <section className="relative overflow-hidden pb-10 pt-36 md:pt-44" aria-label="Introduction">
-      {/* floating tech chips */}
-      <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
-        {site.heroChips.map((chip, i) => (
-          <span
-            key={chip}
-            className={`float-chip absolute rounded-full border border-line bg-panel px-4 py-2 text-sm text-muted/70 backdrop-blur-sm ${chipPositions[i]} [--float-delay:${i * 1.3}s]`}
-          >
-            {chip}
-          </span>
-        ))}
-      </div>
-
       <div className="mx-auto w-full max-w-5xl px-6 text-center">
         <p className="animate-rise mx-auto inline-flex items-center gap-2.5 rounded-full border border-line bg-panel px-5 py-2 text-sm text-muted">
           <span className="relative flex size-2.5">
