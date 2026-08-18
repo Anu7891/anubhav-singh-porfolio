@@ -3,6 +3,7 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { CommandPalette } from "@/components/CommandPalette";
 import { BackToTop } from "@/components/BackToTop";
 import { ChatBot } from "@/components/ChatBot";
+import { ThemeCustomizer } from "@/components/ThemeCustomizer";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
@@ -33,6 +34,7 @@ export default function Home() {
       </main>
       <Footer />
       <BackToTop />
+      <ThemeCustomizer />
       <ChatBot />
     </>
   );
