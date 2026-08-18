@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { site, experience, skillCategories, projects, stats } from "@/lib/data";
 
 /* ------------------------------------------------------------------ */
-/* AskAnubhav — a zero-cost, on-device assistant. No API, no server:  */
-/* it answers from the same data.ts that renders the site, so it      */
-/* never goes out of date and never sends visitor data anywhere.      */
+/* AskAnubhav — portfolio assistant. Talks to /api/chat (Groq, free    */
+/* tier) for real AI answers grounded in data.ts. If no GROQ_API_KEY    */
+/* is set or the request fails, it falls back to the rule-based         */
+/* answer() below, so the bot always works.                             */
 /* ------------------------------------------------------------------ */
 
 type Msg = { from: "bot" | "user"; text: string };
@@ -93,16 +94,32 @@ export function ChatBot() {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
   }, [msgs, typing, open]);
 
-  const send = (text: string) => {
+  const send = async (text: string) => {
     const clean = text.trim();
     if (!clean || typing) return;
-    setMsgs((m) => [...m, { from: "user", text: clean }]);
+    const history = [...msgs, { from: "user" as const, text: clean }];
+    setMsgs(history);
     setInput("");
     setTyping(true);
-    setTimeout(() => {
-      setMsgs((m) => [...m, { from: "bot", text: answer(clean) }]);
-      setTyping(false);
-    }, 550 + Math.random() * 500);
+
+    let reply = "";
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: history.map((m) => ({ role: m.from === "user" ? "user" : "assistant", content: m.text })),
+        }),
+      });
+      if (res.ok) reply = (await res.json()).reply ?? "";
+    } catch {
+      /* fall through to offline answer */
+    }
+    // Offline fallback when there's no API key or the request failed.
+    if (!reply) reply = answer(clean);
+
+    setMsgs((m) => [...m, { from: "bot", text: reply }]);
+    setTyping(false);
   };
 
   return (
@@ -138,7 +155,7 @@ export function ChatBot() {
             <div>
               <p className="text-sm font-semibold text-ink">Anubhav's assistant</p>
               <p className="flex items-center gap-1.5 text-xs text-muted">
-                <span className="size-1.5 rounded-full bg-emerald-400" /> on-device · always free
+                <span className="size-1.5 rounded-full bg-emerald-400" /> AI assistant · ask me anything
               </p>
             </div>
           </header>
