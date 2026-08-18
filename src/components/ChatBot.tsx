@@ -89,10 +89,31 @@ export function ChatBot() {
     { from: "bot", text: "Hi, I'm Anubhav's assistant 👋 Ask me anything about his work — or tap a question below." },
   ]);
   const listRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
   }, [msgs, typing, open]);
+
+  // Close on outside click or Escape.
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      const t = e.target as Node;
+      if (panelRef.current?.contains(t) || btnRef.current?.contains(t)) return;
+      setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
 
   const send = async (text: string) => {
     const clean = text.trim();
@@ -125,6 +146,7 @@ export function ChatBot() {
   return (
     <>
       <button
+        ref={btnRef}
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? "Close chat" : "Chat with Anubhav's assistant"}
         aria-expanded={open}
@@ -144,6 +166,7 @@ export function ChatBot() {
 
       {open ? (
         <div
+          ref={panelRef}
           role="dialog"
           aria-label="Chat with Anubhav's assistant"
           className="fixed bottom-24 right-7 z-40 flex h-[480px] w-[min(360px,calc(100vw-3.5rem))] flex-col overflow-hidden rounded-3xl border border-line bg-bg shadow-2xl"

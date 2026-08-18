@@ -1,14 +1,14 @@
 import { SectionHeader } from "../ui/SectionHeader";
 import { Reveal } from "../ui/Reveal";
+import { Section } from "../ui/Section";
 import { testimonials } from "@/lib/data";
 
 export function Testimonials() {
   if (testimonials.length === 0) return null;
   return (
-    <section id="testimonials" className="scroll-mt-24 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeader label="Kind words" title="What colleagues say." />
-        <ul className="mt-10 grid gap-6 md:grid-cols-3">
+    <Section id="testimonials">
+      <SectionHeader label="Kind words" title="What colleagues say." />
+      <ul className="mt-10 grid gap-6 md:grid-cols-3">
           {testimonials.map((t, i) => (
             <li key={t.name}>
               <Reveal delay={i * 90} className="h-full">
@@ -28,7 +28,6 @@ export function Testimonials() {
             </li>
           ))}
         </ul>
-      </div>
-    </section>
+    </Section>
   );
 }

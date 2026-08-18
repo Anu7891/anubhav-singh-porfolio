@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import { SectionHeader } from "../ui/SectionHeader";
 import { Reveal } from "../ui/Reveal";
+import { Section } from "../ui/Section";
+import { IconBadge } from "../ui/IconBadge";
 import { TechMarquee } from "../ui/TechMarquee";
 import { skillCategories } from "@/lib/data";
 
@@ -50,40 +52,38 @@ const icons: Record<string, ReactNode> = {
 
 export function Skills() {
   return (
-    <section id="skills" className="scroll-mt-24 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeader
-          label="Skills"
-          title="Tools I work with."
-          subtitle="Technologies I've used across commerce projects at 3Embed."
-        />
+    <Section id="skills">
+      <SectionHeader
+        label="Skills"
+        title="Tools I work with."
+        subtitle="Technologies I've used across commerce projects at 3Embed."
+      />
 
-        <Reveal className="mt-12">
-          <TechMarquee />
-        </Reveal>
+      <Reveal className="mt-12">
+        <TechMarquee />
+      </Reveal>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {skillCategories.map((c, i) => (
-            <Reveal key={c.title} delay={(i % 2) * 80}>
-              <div className="group h-full rounded-3xl border border-line bg-panel p-6 transition-colors hover:border-indigo/30">
-                <h3 className="mb-4 flex items-center gap-2.5 text-[15px] font-semibold text-ink">
-                  <span className="grid size-8 place-items-center rounded-lg bg-gradient-to-br from-indigo to-cyan text-white shadow-sm transition-transform group-hover:scale-110">
-                    {icons[c.icon]}
-                  </span>
-                  {c.title}
-                </h3>
-                <ul className="flex flex-wrap gap-2">
-                  {c.pills.map((p) => (
-                    <li key={p} className="rounded-lg border border-line bg-panel-strong px-3 py-1.5 text-[13px] text-muted">
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
+        {skillCategories.map((c, i) => (
+          <Reveal key={c.title} delay={(i % 2) * 80}>
+            <div className="group h-full rounded-3xl border border-line bg-panel p-6 transition-colors hover:border-indigo/30">
+              <h3 className="mb-4 flex items-center gap-2.5 text-[15px] font-semibold text-ink">
+                <IconBadge className="size-8 rounded-lg shadow-sm transition-transform group-hover:scale-110">
+                  {icons[c.icon]}
+                </IconBadge>
+                {c.title}
+              </h3>
+              <ul className="flex flex-wrap gap-2">
+                {c.pills.map((p) => (
+                  <li key={p} className="rounded-lg border border-line bg-panel-strong px-3 py-1.5 text-[13px] text-muted">
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

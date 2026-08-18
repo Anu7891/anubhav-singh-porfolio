@@ -3,6 +3,8 @@
 import { type FormEvent } from "react";
 import { SectionHeader } from "../ui/SectionHeader";
 import { Reveal } from "../ui/Reveal";
+import { Section } from "../ui/Section";
+import { IconBadge } from "../ui/IconBadge";
 import { site } from "@/lib/data";
 
 const channels = [
@@ -47,21 +49,20 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-24 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeader
-          label="Contact"
-          title="Let's work together."
-          subtitle="I'm open to frontend roles and freelance work. I usually reply within a day."
-        />
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.6fr]">
+    <Section id="contact">
+      <SectionHeader
+        label="Contact"
+        title="Let's work together."
+        subtitle="I'm open to frontend roles and freelance work. I usually reply within a day."
+      />
+      <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.6fr]">
           <ul className="space-y-4">
             {channels.map((c, i) => {
               const inner = (
                 <span className="flex items-center gap-4">
-                  <span className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo to-cyan text-white shadow-sm">
+                  <IconBadge className="size-12 rounded-2xl shadow-sm">
                     {icons[c.icon]}
-                  </span>
+                  </IconBadge>
                   <span>
                     <span className="block text-xs font-semibold tracking-[0.18em] text-muted uppercase">
                       {c.label}
@@ -145,7 +146,6 @@ export function Contact() {
             </form>
           </Reveal>
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

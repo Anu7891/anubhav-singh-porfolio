@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import { SectionHeader } from "../ui/SectionHeader";
 import { Reveal } from "../ui/Reveal";
+import { Section } from "../ui/Section";
+import { IconBadge } from "../ui/IconBadge";
 import { about } from "@/lib/data";
 
 const icons: Record<string, ReactNode> = {
@@ -30,29 +32,27 @@ const icons: Record<string, ReactNode> = {
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-24 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeader
-          label="About"
-          title={`${about.headline[0]} ${about.headline[1]}`}
-          subtitle={about.body}
-        />
-        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {about.cards.map((card, i) => (
-            <Reveal key={card.title} delay={i * 80} className="h-full">
-              <div className="group flex h-full flex-col gap-3 rounded-2xl border border-line bg-panel p-6 transition-colors hover:border-indigo/40">
-                <span className="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-indigo to-cyan text-white shadow-sm transition-transform group-hover:scale-110">
-                  {icons[card.icon]}
-                </span>
-                <div>
-                  <h3 className="text-base font-semibold text-ink">{card.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted">{card.sub}</p>
-                </div>
+    <Section id="about">
+      <SectionHeader
+        label="About"
+        title={`${about.headline[0]} ${about.headline[1]}`}
+        subtitle={about.body}
+      />
+      <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {about.cards.map((card, i) => (
+          <Reveal key={card.title} delay={i * 80} className="h-full">
+            <div className="group flex h-full flex-col gap-3 rounded-2xl border border-line bg-panel p-6 transition-colors hover:border-indigo/40">
+              <IconBadge className="size-10 rounded-xl shadow-sm transition-transform group-hover:scale-110">
+                {icons[card.icon]}
+              </IconBadge>
+              <div>
+                <h3 className="text-base font-semibold text-ink">{card.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-muted">{card.sub}</p>
               </div>
-            </Reveal>
-          ))}
-        </div>
+            </div>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

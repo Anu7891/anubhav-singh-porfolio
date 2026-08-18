@@ -12,6 +12,24 @@ export function Nav() {
     document.documentElement.dataset.theme = saved;
   }, []);
 
+  // Smooth-scroll in-page links without leaving a #hash in the URL.
+  // The skip-link (sr-only) keeps its native behaviour for accessibility.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement).closest?.('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!a || a.classList.contains("sr-only")) return;
+      const href = a.getAttribute("href") || "";
+      if (href.length < 2) return;
+      const el = document.getElementById(href.slice(1));
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      history.replaceState(null, "", location.pathname + location.search);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
     setTheme(next);

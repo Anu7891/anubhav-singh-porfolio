@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { SectionHeader } from "../ui/SectionHeader";
 import { Reveal } from "../ui/Reveal";
+import { Section } from "../ui/Section";
+import { Button } from "../ui/Button";
+import { Tag } from "../ui/Tag";
 import { projects, type Project } from "@/lib/data";
 
 const tintA: Record<Project["tint"], string> = {
@@ -153,35 +156,20 @@ function Body({ p, index, onOpenOverview }: { p: Project; index: number; onOpenO
       <p className="mt-3 leading-relaxed text-muted">{p.description}</p>
       <ul className="mt-4 flex flex-wrap gap-2">
         {p.tech.map((t) => (
-          <li key={t} className="rounded-md border border-line bg-panel-strong px-3 py-1 font-mono text-xs text-muted">
-            {t}
-          </li>
+          <Tag key={t}>{t}</Tag>
         ))}
       </ul>
       <div className="mt-6 flex flex-wrap items-center gap-3">
         {p.overview ? (
-          <button
-            type="button"
-            onClick={() => onOpenOverview(p)}
-            className="inline-flex items-center gap-2 btn-primary rounded-lg px-5 py-2.5 text-sm font-semibold"
-          >
+          <Button type="button" onClick={() => onOpenOverview(p)}>
             View overview
             <ExpandIcon />
-          </button>
+          </Button>
         ) : null}
-        <a
-          href={p.url}
-          target="_blank"
-          rel="noreferrer"
-          className={
-            p.overview
-              ? "inline-flex items-center gap-2 btn-outline rounded-lg px-5 py-2.5 text-sm font-semibold"
-              : "inline-flex items-center gap-2 btn-primary rounded-lg px-5 py-2.5 text-sm font-semibold"
-          }
-        >
+        <Button href={p.url} target="_blank" rel="noreferrer" variant={p.overview ? "outline" : "primary"}>
           Visit live site
           <ArrowIcon />
-        </a>
+        </Button>
       </div>
     </div>
   );
@@ -302,29 +290,18 @@ function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => 
             <h4 className="mt-9 text-sm font-semibold tracking-[0.16em] text-muted uppercase">Stack</h4>
             <ul className="mt-4 flex flex-wrap gap-2">
               {o.stack.map((t) => (
-                <li key={t} className="rounded-md border border-line bg-panel-strong px-3 py-1 font-mono text-xs text-muted">
-                  {t}
-                </li>
+                <Tag key={t}>{t}</Tag>
               ))}
             </ul>
 
             <div className="mt-9 flex flex-wrap items-center gap-3 border-t border-line pt-7">
-              <a
-                href={p.url}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 btn-primary rounded-lg px-5 py-2.5 text-sm font-semibold"
-              >
+              <Button href={p.url} target="_blank" rel="noreferrer">
                 Visit live site
                 <ArrowIcon />
-              </a>
-              <button
-                type="button"
-                onClick={onClose}
-                className="inline-flex items-center gap-2 btn-outline rounded-lg px-5 py-2.5 text-sm font-semibold"
-              >
+              </Button>
+              <Button type="button" variant="outline" onClick={onClose}>
                 Close
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -360,14 +337,13 @@ export function Projects() {
   }, [active]);
 
   return (
-    <section id="projects" className="scroll-mt-24 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeader
-          label="Selected work"
-          title="Projects I've worked on."
-          subtitle="Commerce storefronts I've worked on at 3Embed — e-commerce, B2B and food-ordering — as part of a small team."
-        />
-        <div className="mt-12 flex flex-col gap-7">
+    <Section id="projects">
+      <SectionHeader
+        label="Selected work"
+        title="Projects I've worked on."
+        subtitle="Commerce storefronts I've worked on at 3Embed — e-commerce, B2B and food-ordering — as part of a small team."
+      />
+      <div className="mt-12 flex flex-col gap-7">
           {projects.map((p, i) => {
             const reversed = i % 2 === 1;
             return (
@@ -382,7 +358,6 @@ export function Projects() {
             );
           })}
         </div>
-      </div>
 
       {active ? <ProjectModal p={active} onClose={() => setActive(null)} onOpenImage={openZoom} /> : null}
 
@@ -395,6 +370,6 @@ export function Projects() {
           </figure>
         </div>
       ) : null}
-    </section>
+    </Section>
   );
 }

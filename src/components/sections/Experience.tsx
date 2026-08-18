@@ -1,13 +1,13 @@
 import { SectionHeader } from "../ui/SectionHeader";
 import { Reveal } from "../ui/Reveal";
+import { Section } from "../ui/Section";
 import { experience } from "@/lib/data";
 
 export function Experience() {
   return (
-    <section id="experience" className="scroll-mt-24 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeader label="Experience" title="Work experience." />
-        <div className="relative mt-12">
+    <Section id="experience">
+      <SectionHeader label="Experience" title="Work experience." />
+      <div className="relative mt-12">
           {/* center line */}
           <div
             className="absolute left-4 top-0 h-full w-px bg-line md:left-1/2 md:-translate-x-1/2"
@@ -66,7 +66,6 @@ export function Experience() {
             })}
           </ol>
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }
