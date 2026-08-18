@@ -2,11 +2,14 @@ import { site } from "@/lib/data";
 import { Typewriter } from "../ui/Typewriter";
 
 const chipPositions = [
-  "left-[6%] top-[18%]",
-  "right-[10%] top-[22%]",
-  "left-[12%] bottom-[24%]",
-  "right-[6%] bottom-[30%]",
-  "left-[48%] top-[8%]",
+  "left-[5%] top-[20%]",
+  "right-[6%] top-[24%]",
+  "left-[9%] top-[44%]",
+  "right-[7%] top-[48%]",
+  "left-[7%] bottom-[20%]",
+  "right-[6%] bottom-[24%]",
+  "left-[44%] top-[6%]",
+  "right-[16%] top-[13%]",
 ];
 
 export function Hero() {

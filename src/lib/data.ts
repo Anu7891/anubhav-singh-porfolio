@@ -15,7 +15,7 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/anubhav-singh-50a197191",
   linkedinHandle: "/in/anubhav-singh-50a197191",
   resumeUrl: "/resume.pdf",
-  heroChips: ["React.js", "Next.js", "TypeScript", "Redux Toolkit", "Tailwind"],
+  heroChips: ["React.js", "Next.js", "TypeScript", "JavaScript", "Redux Toolkit", "Tailwind CSS", "Node.js", "Typesense"],
 };
 
 export const about = {
@@ -207,7 +207,7 @@ export const projects: Project[] = [
       { label: "referrals", src: "/projects/truly-referrals.png" },
       { label: "chat", src: "/projects/truly-chat.png" },
     ],
-    tint: "violet",
+    tint: "cyan",
     overview: {
       summary:
         "TrulyFree is a US marketplace for better, non-toxic products with a membership and cash-back model. Shoppers browse hundreds of brands, watch a social/live-shopping feed, and check out with express payments. I worked on the storefront front end as part of a small team — Redux-Saga data flow, Algolia search and LiveKit-powered live shopping, with Sentry monitoring in production.",
@@ -228,6 +228,7 @@ export const projects: Project[] = [
       ],
       stack: ["Next.js 12", "React 18", "Redux-Saga", "Algolia", "Stripe", "Apple Pay", "Google Pay", "LiveKit", "Sentry"],
     },
+    // tint kept in the indigo/cyan family for a consistent, symmetric palette
   },
 ];
 

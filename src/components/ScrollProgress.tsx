@@ -20,7 +20,7 @@ export function ScrollProgress() {
     <div className="fixed inset-x-0 top-0 z-50 h-0.5" aria-hidden="true">
       <div
         ref={ref}
-        className="h-full origin-left bg-gradient-to-r from-indigo via-sky-400 to-cyan"
+        className="h-full origin-left bg-gradient-to-r from-indigo to-cyan"
       />
     </div>
   );

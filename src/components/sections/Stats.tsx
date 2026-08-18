@@ -35,7 +35,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   return (
     <span ref={ref} className="text-5xl font-bold tracking-tight text-ink md:text-6xl">
       {display.toLocaleString()}
-      <span className="text-sky-400">{suffix}</span>
+      <span className="text-cyan">{suffix}</span>
     </span>
   );
 }

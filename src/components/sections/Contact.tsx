@@ -59,7 +59,7 @@ export function Contact() {
             {channels.map((c, i) => {
               const inner = (
                 <span className="flex items-center gap-4">
-                  <span className="flex size-12 items-center justify-center rounded-2xl bg-indigo/15 text-indigo-300">
+                  <span className="flex size-12 items-center justify-center rounded-2xl bg-indigo/15 text-indigo">
                     {icons[c.icon]}
                   </span>
                   <span>
