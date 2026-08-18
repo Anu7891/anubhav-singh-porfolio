@@ -197,11 +197,15 @@ export const projects: Project[] = [
     tech: ["Next.js 12", "React 18", "Redux Saga", "Algolia", "Stripe", "Apple Pay", "Google Pay", "LiveKit", "Sentry"],
     image: "/projects/truly-home.png",
     shots: [
-      { label: "shop", src: "/projects/truly-shop.png" },
-      { label: "live", src: "/projects/truly-live.png" },
-      { label: "product", src: "/projects/truly-product.png" },
+      { label: "plp", src: "/projects/truly-shop.png" },
+      { label: "pdp", src: "/projects/truly-product.png" },
       { label: "cart", src: "/projects/truly-cart.png" },
       { label: "checkout", src: "/projects/truly-checkout.png" },
+      { label: "social", src: "/projects/truly-live.png" },
+      { label: "profile", src: "/projects/truly-profile.png" },
+      { label: "orders", src: "/projects/truly-orders.png" },
+      { label: "referrals", src: "/projects/truly-referrals.png" },
+      { label: "chat", src: "/projects/truly-chat.png" },
     ],
     tint: "violet",
     overview: {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { SectionHeader } from "../ui/SectionHeader";
 import { Reveal } from "../ui/Reveal";
 import { projects, type Project } from "@/lib/data";
@@ -70,11 +70,55 @@ function Visual({ p, onOpen }: { p: Project; onOpen: (src: string) => void }) {
           </div>
         )}
       </div>
-      <div className="thumb-strip">
+      <ThumbCarousel p={p} onOpen={onOpen} />
+    </div>
+  );
+}
+
+function ChevronIcon({ dir }: { dir: "left" | "right" }) {
+  return (
+    <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="currentColor" strokeWidth={2.2} aria-hidden="true">
+      <path d={dir === "left" ? "M15 6l-6 6 6 6" : "M9 6l6 6-6 6"} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ThumbCarousel({ p, onOpen }: { p: Project; onOpen: (src: string) => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  const update = () => {
+    const el = ref.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 2);
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
+  };
+
+  useEffect(() => {
+    update();
+    const el = ref.current;
+    if (!el) return;
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const scroll = (dir: number) => {
+    const el = ref.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
+  };
+
+  const showArrows = p.shots.filter((s) => s.src).length > 4;
+
+  return (
+    <div className="thumb-carousel">
+      <div className="thumb-strip" ref={ref} onScroll={update}>
         {p.shots.map((s, i) =>
           s.src ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img key={i} className="thumb-img" src={s.src} alt={`${p.name} — ${s.label}`} loading="lazy" onClick={() => onOpen(s.src!)} />
+            <img key={i} className="thumb-img" src={s.src} alt={`${p.name} — ${s.label}`} title={prettyLabel(s.label)} loading="lazy" onClick={() => onOpen(s.src!)} />
           ) : (
             <div key={i} className="thumb-slot" title={`Add ${s.label} screenshot`}>
               <PlusIcon />
@@ -83,6 +127,16 @@ function Visual({ p, onOpen }: { p: Project; onOpen: (src: string) => void }) {
           ),
         )}
       </div>
+      {showArrows ? (
+        <>
+          <button type="button" className="thumb-arrow prev" data-hidden={atStart} aria-label="Previous thumbnails" onClick={() => scroll(-1)}>
+            <ChevronIcon dir="left" />
+          </button>
+          <button type="button" className="thumb-arrow next" data-hidden={atEnd} aria-label="More thumbnails" onClick={() => scroll(1)}>
+            <ChevronIcon dir="right" />
+          </button>
+        </>
+      ) : null}
     </div>
   );
 }
@@ -133,15 +187,26 @@ function Body({ p, index, onOpenOverview }: { p: Project; index: number; onOpenO
   );
 }
 
-function Slider({ images, alt, onOpen }: { images: string[]; alt: string; onOpen: (src: string) => void }) {
+type Slide = { src: string; label: string };
+
+const labelNames: Record<string, string> = {
+  menu: "Menu", listing: "Product listing", plp: "Product listing", product: "Product page",
+  pdp: "Product page", cart: "Cart", checkout: "Checkout", builder: "Hamper builder",
+  shop: "Shop", live: "Live shopping", social: "Social feed", profile: "Profile",
+  orders: "My orders", referrals: "Referrals", chat: "Messages", combo: "Combos", catalog: "Catalog",
+};
+const prettyLabel = (l: string) => labelNames[l] ?? l.charAt(0).toUpperCase() + l.slice(1);
+
+function Slider({ slides, alt, onOpen }: { slides: Slide[]; alt: string; onOpen: (src: string) => void }) {
   const [i, setI] = useState(0);
-  const n = images.length;
+  const n = slides.length;
   const go = (d: number) => setI((v) => (v + d + n) % n);
   if (n === 0) return null;
   return (
     <div className="macwin-slider">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="macwin-slide" src={images[i]} alt={`${alt} — image ${i + 1}`} onClick={() => onOpen(images[i])} />
+      <img className="macwin-slide" src={slides[i].src} alt={`${alt} — ${slides[i].label}`} onClick={() => onOpen(slides[i].src)} />
+      <span className="macwin-label">{slides[i].label}</span>
       {n > 1 ? (
         <>
           <span className="macwin-count">{i + 1} / {n}</span>
@@ -152,8 +217,8 @@ function Slider({ images, alt, onOpen }: { images: string[]; alt: string; onOpen
             <svg viewBox="0 0 24 24" width={18} height={18} fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true"><path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>
           <div className="macwin-dots">
-            {images.map((_, d) => (
-              <button key={d} type="button" className={`macwin-dot${d === i ? " active" : ""}`} aria-label={`Go to image ${d + 1}`} onClick={() => setI(d)} />
+            {slides.map((s, d) => (
+              <button key={d} type="button" className={`macwin-dot${d === i ? " active" : ""}`} aria-label={`Go to ${s.label}`} onClick={() => setI(d)} />
             ))}
           </div>
         </>
@@ -164,7 +229,10 @@ function Slider({ images, alt, onOpen }: { images: string[]; alt: string; onOpen
 
 function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => void; onOpenImage: (src: string) => void }) {
   const o = p.overview!;
-  const gallery = [p.image, ...p.shots.map((s) => s.src)].filter(Boolean) as string[];
+  const gallery: Slide[] = [
+    ...(p.image ? [{ src: p.image, label: "Homepage" }] : []),
+    ...p.shots.flatMap((s) => (s.src ? [{ src: s.src, label: prettyLabel(s.label) }] : [])),
+  ];
   return (
     <div className="macwin-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-label={`${p.name} — project overview`}>
       <div className="macwin" onClick={(e) => e.stopPropagation()}>
@@ -185,7 +253,7 @@ function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => 
 
         {/* Scrollable window body */}
         <div className="macwin-body">
-          <Slider key={p.name} images={gallery} alt={p.name} onOpen={onOpenImage} />
+          <Slider key={p.name} slides={gallery} alt={p.name} onOpen={onOpenImage} />
 
           <div className="macwin-content">
             <p className="font-mono text-[11.5px] tracking-[0.12em] text-indigo uppercase">
