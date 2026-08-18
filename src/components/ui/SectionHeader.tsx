@@ -9,7 +9,7 @@ export function SectionHeader({ label, title, subtitle }: SectionHeaderProps) {
         <span className="size-1.5 rounded-full bg-indigo" aria-hidden="true" />
         {label}
       </p>
-      <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-bold tracking-tight text-ink md:text-6xl">
+      <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-bold tracking-tight text-title md:text-6xl">
         {title}
       </h2>
       {subtitle ? (

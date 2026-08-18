@@ -109,7 +109,7 @@ function Body({ p, index, onOpenOverview }: { p: Project; index: number; onOpenO
           <button
             type="button"
             onClick={() => onOpenOverview(p)}
-            className="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-bg transition hover:opacity-90"
+            className="inline-flex items-center gap-2 btn-primary rounded-lg px-5 py-2.5 text-sm font-semibold"
           >
             View overview
             <ExpandIcon />
@@ -121,8 +121,8 @@ function Body({ p, index, onOpenOverview }: { p: Project; index: number; onOpenO
           rel="noreferrer"
           className={
             p.overview
-              ? "inline-flex items-center gap-2 rounded-lg border border-line px-5 py-2.5 text-sm font-semibold text-ink transition hover:border-indigo/50"
-              : "inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-bg transition hover:opacity-90"
+              ? "inline-flex items-center gap-2 btn-outline rounded-lg px-5 py-2.5 text-sm font-semibold"
+              : "inline-flex items-center gap-2 btn-primary rounded-lg px-5 py-2.5 text-sm font-semibold"
           }
         >
           Visit live site
@@ -133,8 +133,38 @@ function Body({ p, index, onOpenOverview }: { p: Project; index: number; onOpenO
   );
 }
 
+function Slider({ images, alt, onOpen }: { images: string[]; alt: string; onOpen: (src: string) => void }) {
+  const [i, setI] = useState(0);
+  const n = images.length;
+  const go = (d: number) => setI((v) => (v + d + n) % n);
+  if (n === 0) return null;
+  return (
+    <div className="macwin-slider">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="macwin-slide" src={images[i]} alt={`${alt} — image ${i + 1}`} onClick={() => onOpen(images[i])} />
+      {n > 1 ? (
+        <>
+          <span className="macwin-count">{i + 1} / {n}</span>
+          <button type="button" className="macwin-nav prev" aria-label="Previous image" onClick={() => go(-1)}>
+            <svg viewBox="0 0 24 24" width={18} height={18} fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true"><path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </button>
+          <button type="button" className="macwin-nav next" aria-label="Next image" onClick={() => go(1)}>
+            <svg viewBox="0 0 24 24" width={18} height={18} fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true"><path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </button>
+          <div className="macwin-dots">
+            {images.map((_, d) => (
+              <button key={d} type="button" className={`macwin-dot${d === i ? " active" : ""}`} aria-label={`Go to image ${d + 1}`} onClick={() => setI(d)} />
+            ))}
+          </div>
+        </>
+      ) : null}
+    </div>
+  );
+}
+
 function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => void; onOpenImage: (src: string) => void }) {
   const o = p.overview!;
+  const gallery = [p.image, ...p.shots.map((s) => s.src)].filter(Boolean) as string[];
   return (
     <div className="macwin-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-label={`${p.name} — project overview`}>
       <div className="macwin" onClick={(e) => e.stopPropagation()}>
@@ -155,21 +185,13 @@ function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => 
 
         {/* Scrollable window body */}
         <div className="macwin-body">
-          {p.image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              className="macwin-hero"
-              src={p.image}
-              alt={`${p.name} homepage`}
-              onClick={() => onOpenImage(p.image!)}
-            />
-          ) : null}
+          <Slider key={p.name} images={gallery} alt={p.name} onOpen={onOpenImage} />
 
           <div className="macwin-content">
             <p className="font-mono text-[11.5px] tracking-[0.12em] text-indigo uppercase">
               {p.category} <span className="text-muted">/ {p.kind}</span>
             </p>
-            <h3 className="mt-2 text-3xl font-bold tracking-tight text-ink md:text-4xl">{p.name}</h3>
+            <h3 className="mt-2 text-3xl font-bold tracking-tight text-title md:text-4xl">{p.name}</h3>
             <p className="mt-4 max-w-2xl leading-relaxed text-muted">{o.summary}</p>
 
             {/* Meta row */}
@@ -223,7 +245,7 @@ function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => 
                 href={p.url}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-bg transition hover:opacity-90"
+                className="inline-flex items-center gap-2 btn-primary rounded-lg px-5 py-2.5 text-sm font-semibold"
               >
                 Visit live site
                 <ArrowIcon />
@@ -231,7 +253,7 @@ function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => 
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex items-center gap-2 rounded-lg border border-line px-5 py-2.5 text-sm font-semibold text-ink transition hover:border-indigo/50"
+                className="inline-flex items-center gap-2 btn-outline rounded-lg px-5 py-2.5 text-sm font-semibold"
               >
                 Close
               </button>

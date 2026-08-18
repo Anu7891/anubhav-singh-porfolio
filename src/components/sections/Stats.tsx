@@ -67,7 +67,7 @@ export function Stats() {
         {/* Key achievements */}
         <Reveal>
           <div className="mt-4 rounded-3xl border border-line bg-panel p-7 md:p-10">
-            <h2 className="text-center text-2xl font-bold tracking-tight text-ink md:text-3xl">
+            <h2 className="text-center text-2xl font-bold tracking-tight text-title md:text-3xl">
               Key achievements
             </h2>
             <ul className="mx-auto mt-8 grid max-w-4xl gap-x-10 gap-y-5 sm:grid-cols-2">

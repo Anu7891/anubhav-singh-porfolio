@@ -194,9 +194,36 @@ export const projects: Project[] = [
     kind: "live shopping",
     description:
       "Feature-rich commerce storefront with multi-gateway checkout (Stripe, Google Pay, Apple Pay), Algolia search, LiveKit live-shopping streams, in-app chat, Gemini-powered assistance and GrowthBook feature flags. Redux-Saga data flow with Sentry monitoring for production reliability.",
-    tech: ["Next.js 12", "React 18", "Redux Saga", "Algolia", "Stripe", "Apple Pay", "LiveKit", "Sentry"],
-    shots: [{ label: "shop" }, { label: "live" }, { label: "product" }, { label: "checkout" }],
+    tech: ["Next.js 12", "React 18", "Redux Saga", "Algolia", "Stripe", "Apple Pay", "Google Pay", "LiveKit", "Sentry"],
+    image: "/projects/truly-home.png",
+    shots: [
+      { label: "shop", src: "/projects/truly-shop.png" },
+      { label: "live", src: "/projects/truly-live.png" },
+      { label: "product", src: "/projects/truly-product.png" },
+      { label: "cart", src: "/projects/truly-cart.png" },
+      { label: "checkout", src: "/projects/truly-checkout.png" },
+    ],
     tint: "violet",
+    overview: {
+      summary:
+        "TrulyFree is a US marketplace for better, non-toxic products with a membership and cash-back model. Shoppers browse hundreds of brands, watch a social/live-shopping feed, and check out with express payments. I worked on the storefront front end as part of a small team — Redux-Saga data flow, Algolia search and LiveKit-powered live shopping, with Sentry monitoring in production.",
+      role: "Frontend Developer · small team (2–3)",
+      timeline: "2023–2024 · 3Embed (TrulyFree)",
+      platform: "TrulyFree marketplace",
+      highlights: [
+        "Membership + cash-back pricing shown across listings, cart and checkout.",
+        "Express multi-gateway checkout — Apple Pay, Google Pay and card.",
+        "Social / live-shopping feed with LiveKit streams and in-app engagement.",
+        "Algolia instant search with rich filters (badges, price, shipping).",
+      ],
+      features: [
+        { title: "Shop & filters", body: "Category listings with badge, price and shipping filters, Algolia-powered." },
+        { title: "Product pages", body: "Bundles, member vs non-member pricing and cash-back, add-to-cart." },
+        { title: "Live & social", body: "TikTok-style trending video feed with follow, like and share." },
+        { title: "Checkout", body: "Express Apple Pay / Google Pay plus contact and shipping, with an order summary." },
+      ],
+      stack: ["Next.js 12", "React 18", "Redux-Saga", "Algolia", "Stripe", "Apple Pay", "Google Pay", "LiveKit", "Sentry"],
+    },
   },
 ];
 

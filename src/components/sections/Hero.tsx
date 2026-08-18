@@ -33,7 +33,7 @@ export function Hero() {
           {site.availability}
         </p>
 
-        <h1 className="animate-rise mt-8 text-6xl font-bold leading-[1.02] tracking-tight text-ink md:whitespace-nowrap md:text-8xl [--rise-delay:100ms]">
+        <h1 className="animate-rise mt-8 text-6xl font-bold leading-[1.02] tracking-tight text-title md:whitespace-nowrap md:text-8xl [--rise-delay:100ms]">
           {site.firstName} <span className="gradient-text">{site.lastName}</span>
         </h1>
 
@@ -49,7 +49,7 @@ export function Hero() {
         <div className="animate-rise mt-10 flex flex-wrap items-center justify-center gap-4 [--rise-delay:300ms]">
           <a
             href="#contact"
-            className="flex h-13 items-center gap-2 rounded-full bg-ink px-7 text-[15px] font-semibold text-bg transition-transform hover:scale-[1.03]"
+            className="btn-primary flex h-13 items-center gap-2 rounded-full px-7 text-[15px] font-semibold hover:scale-[1.03]"
           >
             Get in touch
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">

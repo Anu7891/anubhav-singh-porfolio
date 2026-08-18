@@ -135,7 +135,7 @@ export function Contact() {
               </label>
               <button
                 type="submit"
-                className="mt-8 flex h-13 w-full items-center justify-center gap-2.5 rounded-full bg-ink text-[15px] font-semibold text-bg transition-transform hover:scale-[1.01]"
+                className="btn-primary mt-8 flex h-13 w-full items-center justify-center gap-2.5 rounded-full text-[15px] font-semibold hover:scale-[1.01]"
               >
                 Send message
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
