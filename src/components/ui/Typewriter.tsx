@@ -32,9 +32,9 @@ export function Typewriter({ phrases, className }: { phrases: string[]; classNam
   }, [text, deleting, index, phrases]);
 
   return (
-    <span className={className}>
-      <span aria-live="polite">{text}</span>
-      <span className="tw-caret" aria-hidden="true" />
+    <span className={className} aria-hidden="true">
+      <span>{text}</span>
+      <span className="tw-caret" />
     </span>
   );
 }

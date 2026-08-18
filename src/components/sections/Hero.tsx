@@ -18,7 +18,8 @@ export function Hero() {
         </h1>
 
         <p className="animate-rise mt-7 flex items-center justify-center gap-2 text-xl font-semibold text-ink md:text-3xl [--rise-delay:180ms]">
-          <span className="text-indigo">✦</span>
+          <span className="text-indigo" aria-hidden="true">✦</span>
+          <span className="sr-only">Frontend Developer — React &amp; Next.js</span>
           <Typewriter phrases={["Frontend Developer", "React & Next.js Developer", "E-commerce frontend"]} />
         </p>
 
@@ -56,7 +57,7 @@ export function Hero() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={s.label}
-                className="flex size-13 items-center justify-center rounded-full border border-line bg-panel text-muted transition-colors hover:text-ink"
+                className="flex size-13 items-center justify-center rounded-full border border-line bg-panel text-ink shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo/50 hover:bg-indigo/10 hover:text-indigo hover:shadow-md"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                   <path d={s.d} />
@@ -66,7 +67,7 @@ export function Hero() {
             <a
               href={`mailto:${site.email}`}
               aria-label="Email"
-              className="flex size-13 items-center justify-center rounded-full border border-line bg-panel text-muted transition-colors hover:text-ink"
+              className="flex size-13 items-center justify-center rounded-full border border-line bg-panel text-ink shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo/50 hover:bg-indigo/10 hover:text-indigo hover:shadow-md"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
