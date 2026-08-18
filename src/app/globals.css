@@ -221,6 +221,7 @@ button:disabled { cursor: not-allowed; }
   box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.4);
   transition: opacity 0.2s, transform 0.15s, background 0.2s;
 }
+.thumb-arrow { cursor: pointer; }
 .thumb-arrow:hover { background: var(--bg); transform: translateY(-50%) scale(1.08); }
 .thumb-arrow.prev { left: -8px; }
 .thumb-arrow.next { right: -8px; }
@@ -316,6 +317,7 @@ button:disabled { cursor: not-allowed; }
   backdrop-filter: blur(6px);
   transition: background 0.2s, transform 0.15s;
 }
+.macwin-nav { cursor: pointer; }
 .macwin-nav:hover { background: rgba(10, 10, 16, 0.85); }
 .macwin-nav.prev { left: 12px; }
 .macwin-nav.next { right: 12px; }
@@ -326,6 +328,7 @@ button:disabled { cursor: not-allowed; }
 .macwin-dot {
   width: 7px; height: 7px; border-radius: 999px;
   background: rgba(255, 255, 255, 0.4); border: none; padding: 0;
+  cursor: pointer;
   transition: background 0.2s, width 0.2s;
 }
 .macwin-dot.active { background: #fff; width: 20px; }

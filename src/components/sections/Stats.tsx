@@ -73,7 +73,7 @@ export function Stats() {
             <ul className="mx-auto mt-8 grid max-w-4xl gap-x-10 gap-y-5 sm:grid-cols-2">
               {achievements.map((a) => (
                 <li key={a} className="flex gap-3 leading-relaxed text-ink/90">
-                  <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full border border-line bg-panel-strong text-cyan">
+                  <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo to-cyan text-white">
                     <CheckIcon />
                   </span>
                   {a}

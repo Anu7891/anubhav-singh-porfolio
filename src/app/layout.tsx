@@ -58,6 +58,7 @@ const personSchema = {
   "@type": "Person",
   name: site.name,
   url,
+  image: `${url}/profile.png`,
   jobTitle: site.role,
   email: `mailto:${site.email}`,
   address: {

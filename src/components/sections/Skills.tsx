@@ -65,9 +65,9 @@ export function Skills() {
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {skillCategories.map((c, i) => (
             <Reveal key={c.title} delay={(i % 2) * 80}>
-              <div className="h-full rounded-3xl border border-line bg-panel p-6 transition-colors hover:border-indigo/30">
+              <div className="group h-full rounded-3xl border border-line bg-panel p-6 transition-colors hover:border-indigo/30">
                 <h3 className="mb-4 flex items-center gap-2.5 text-[15px] font-semibold text-ink">
-                  <span className="grid size-8 place-items-center rounded-lg border border-line bg-panel-strong text-cyan">
+                  <span className="grid size-8 place-items-center rounded-lg bg-gradient-to-br from-indigo to-cyan text-white shadow-sm transition-transform group-hover:scale-110">
                     {icons[c.icon]}
                   </span>
                   {c.title}

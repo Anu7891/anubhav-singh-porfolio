@@ -40,8 +40,8 @@ export function About() {
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {about.cards.map((card, i) => (
             <Reveal key={card.title} delay={i * 80} className="h-full">
-              <div className="flex h-full flex-col gap-3 rounded-2xl border border-line bg-panel p-6 transition-colors hover:border-indigo/40">
-                <span className="grid size-10 place-items-center rounded-xl border border-line bg-panel-strong text-cyan">
+              <div className="group flex h-full flex-col gap-3 rounded-2xl border border-line bg-panel p-6 transition-colors hover:border-indigo/40">
+                <span className="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-indigo to-cyan text-white shadow-sm transition-transform group-hover:scale-110">
                   {icons[card.icon]}
                 </span>
                 <div>
