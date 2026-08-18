@@ -1,6 +1,6 @@
 "use client";
 
-import { type FormEvent } from "react";
+import { type FormEvent, useState } from "react";
 import { SectionHeader } from "../ui/SectionHeader";
 import { Reveal } from "../ui/Reveal";
 import { Section } from "../ui/Section";
@@ -39,13 +39,52 @@ const icons: Record<string, React.ReactNode> = {
   ),
 };
 
+// Free form-to-email via Web3Forms (https://web3forms.com). The access key is
+// public-safe by design (it only routes to the owner's email). Add it as
+// NEXT_PUBLIC_WEB3FORMS_KEY; without it, the form falls back to the visitor's
+// mail client so it never breaks.
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+
 export function Contact() {
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const subject = encodeURIComponent(`Portfolio contact from ${data.get("name")}`);
-    const body = encodeURIComponent(`${data.get("message")}\n\n— ${data.get("name")} (${data.get("email")})`);
-    location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    if (!WEB3FORMS_KEY) {
+      const subject = encodeURIComponent(`Portfolio contact from ${data.get("name")}`);
+      const body = encodeURIComponent(`${data.get("message")}\n\n— ${data.get("name")} (${data.get("email")})`);
+      location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+      return;
+    }
+
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Portfolio contact from ${data.get("name")}`,
+          from_name: "Portfolio contact form",
+          name: data.get("name"),
+          email: data.get("email"),
+          message: data.get("message"),
+          botcheck: data.get("botcheck"),
+        }),
+      });
+      const json = await res.json();
+      if (json?.success) {
+        setStatus("sent");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -134,15 +173,27 @@ export function Contact() {
                   className="mt-2.5 w-full resize-none rounded-xl border border-line bg-bg/60 px-4 py-3 text-[15px] text-ink outline-none transition-colors placeholder:text-muted/60 focus:border-indigo/60"
                 />
               </label>
+              {/* Honeypot — hidden from humans, catches bots. */}
+              <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
               <button
                 type="submit"
-                className="btn-primary mt-8 flex h-13 w-full items-center justify-center gap-2.5 rounded-full text-[15px] font-semibold hover:scale-[1.01]"
+                disabled={status === "sending"}
+                className="btn-primary mt-8 flex h-13 w-full items-center justify-center gap-2.5 rounded-full text-[15px] font-semibold hover:scale-[1.01] disabled:opacity-60"
               >
-                Send message
+                {status === "sending" ? "Sending…" : "Send message"}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M14.5 1.5 7 9m7.5-7.5L9.8 14.3a.4.4 0 0 1-.74.03L7 9m7.5-7.5L1.7 6.2a.4.4 0 0 0 .03.74L7 9" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
                 </svg>
               </button>
+              <p aria-live="polite" className="mt-3 min-h-[1.25rem] text-sm">
+                {status === "sent" ? (
+                  <span className="text-emerald-500">Thanks! Your message was sent — I&apos;ll reply within a day. ✅</span>
+                ) : status === "error" ? (
+                  <span className="text-rose-500">
+                    Couldn&apos;t send. Please email me directly at {site.email}.
+                  </span>
+                ) : null}
+              </p>
             </form>
           </Reveal>
         </div>
