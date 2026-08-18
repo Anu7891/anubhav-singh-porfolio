@@ -54,7 +54,7 @@ export async function POST(req: Request) {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
       body: JSON.stringify({
-        model: process.env.GROQ_MODEL || "llama-3.3-70b-versatile",
+        model: process.env.GROQ_MODEL || "llama-3.1-8b-instant",
         temperature: 0.4,
         max_tokens: 400,
         messages: [{ role: "system", content: systemPrompt }, ...history],
