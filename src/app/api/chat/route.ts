@@ -62,7 +62,15 @@ export async function POST(req: Request) {
     });
 
     if (!res.ok) {
-      return NextResponse.json({ error: "upstream" }, { status: 502 });
+      let detail = "";
+      try {
+        const e = await res.json();
+        detail = e?.error?.message || JSON.stringify(e).slice(0, 200);
+      } catch {
+        detail = (await res.text().catch(() => "")).slice(0, 200);
+      }
+      // Note: never includes the API key — only Groq's error message.
+      return NextResponse.json({ error: "upstream", upstreamStatus: res.status, detail }, { status: 502 });
     }
 
     const data = await res.json();
