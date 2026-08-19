@@ -230,9 +230,22 @@ button:disabled { cursor: not-allowed; }
 .thumb-slot:hover { border-color: #6366f1; background: rgba(99, 102, 241, 0.06); }
 .thumb-slot .t { font-size: 9.5px; color: var(--muted); font-family: var(--font-mono); letter-spacing: 0.03em; }
 .thumb-img { aspect-ratio: 4 / 3; object-fit: cover; object-position: top; border-radius: 9px; border: 1px solid var(--line); cursor: zoom-in; }
-.lightbox { position: fixed; inset: 0; z-index: 60; background: rgba(4, 4, 8, 0.94); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 40px; cursor: zoom-out; }
-.lightbox-figure { display: flex; flex-direction: column; align-items: center; gap: 12px; max-height: 100%; max-width: 100%; }
-.lightbox-img { max-height: calc(100% - 40px); max-width: 100%; border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8); }
+.lightbox { position: fixed; inset: 0; z-index: 60; background: rgba(4, 4, 8, 0.94); backdrop-filter: blur(6px); display: flex; align-items: flex-start; justify-content: center; padding: 24px; overflow-y: auto; overscroll-behavior: contain; cursor: zoom-out; }
+@media (min-width: 768px) { .lightbox { padding: 40px; } }
+.lightbox-figure { display: flex; flex-direction: column; align-items: center; gap: 12px; width: min(1000px, 100%); max-width: 100%; margin: auto; cursor: default; }
+/* Fit tall full-page screenshots to width and let the overlay scroll, so the
+   whole capture stays readable instead of being squished to viewport height. */
+.lightbox-img { width: 100%; height: auto; max-width: 100%; border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8); }
+.lightbox-close {
+  position: fixed; top: 18px; right: 18px; z-index: 61;
+  display: grid; place-items: center;
+  width: 42px; height: 42px; border-radius: 999px;
+  background: rgba(20, 20, 28, 0.7); color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px); cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.lightbox-close:hover { background: rgba(40, 40, 52, 0.9); transform: scale(1.06); }
 .lightbox-cap {
   padding: 6px 16px; border-radius: 999px;
   background: rgba(255, 255, 255, 0.1); color: #fff;

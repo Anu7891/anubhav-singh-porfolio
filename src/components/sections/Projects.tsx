@@ -326,15 +326,15 @@ export function Projects() {
     return () => removeEventListener("keydown", onKey);
   }, [zoom, active]);
 
-  // Lock body scroll while the overview window is open.
+  // Lock body scroll while the overview window or the lightbox is open.
   useEffect(() => {
-    if (!active) return;
+    if (!active && !zoom) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
     };
-  }, [active]);
+  }, [active, zoom]);
 
   return (
     <Section id="projects">
@@ -363,6 +363,11 @@ export function Projects() {
 
       {zoom ? (
         <div className="lightbox" onClick={() => setZoom(null)} role="dialog" aria-modal="true" aria-label={`Enlarged — ${zoom.label}`}>
+          <button type="button" className="lightbox-close" aria-label="Close preview" onClick={() => setZoom(null)}>
+            <svg viewBox="0 0 24 24" width={20} height={20} fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+            </svg>
+          </button>
           <figure className="lightbox-figure" onClick={(e) => e.stopPropagation()}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={zoom.src} alt={zoom.label} className="lightbox-img" />
