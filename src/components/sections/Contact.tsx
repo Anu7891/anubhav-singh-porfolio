@@ -79,6 +79,7 @@ export function Contact() {
       if (json?.success) {
         setStatus("sent");
         form.reset();
+        setTimeout(() => setStatus("idle"), 3000);
       } else {
         setStatus("error");
       }
