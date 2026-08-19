@@ -50,6 +50,7 @@ export const experience = [
       "Improved performance & SEO — raised Lighthouse / Core Web Vitals scores by ~40% via static generation, code-splitting, structured data and dynamic sitemaps.",
       "Architected Redux Toolkit state, type-safe forms and reusable component libraries, cutting repeat UI work by ~30% across projects.",
       "Integrated payment gateways (Stripe, Razorpay), Typesense/Algolia instant search, MQTT real-time order updates, live shopping and Puck-based CMS builders.",
+      "Built end-to-end commerce flows — hamper builders and product customization — and extended React admin panels with self-serve modules for customization pricing and options, so business teams manage them without developer changes.",
     ],
     tech: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Stripe", "Typesense"],
   },
