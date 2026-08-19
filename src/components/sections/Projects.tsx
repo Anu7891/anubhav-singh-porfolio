@@ -249,7 +249,7 @@ function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => 
               {p.category} <span className="text-muted">/ {p.kind}</span>
             </p>
             <h3 className="mt-2 text-3xl font-bold tracking-tight text-title md:text-4xl">{p.name}</h3>
-            <p className="mt-4 max-w-2xl leading-relaxed text-muted">{o.summary}</p>
+            <p className="mt-4 leading-relaxed text-muted">{o.summary}</p>
 
             {/* Meta row */}
             <dl className="mt-7 grid gap-4 sm:grid-cols-3">
