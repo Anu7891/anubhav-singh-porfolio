@@ -6,9 +6,10 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 const url = "https://anubhav-singh-porfolio.vercel.app";
-const title = "Anubhav Singh — Frontend Developer";
+// Title ~52 chars and description ~150 chars — both inside Google's display limits.
+const title = "Anubhav Singh — Frontend Developer | React & Next.js";
 const description =
-  "Frontend developer — React, Next.js & TypeScript. 3+ years at 3Embed building fast, SEO-friendly commerce platforms across e-commerce, B2B and food-ordering: Qykly, Paris Panini, TrulyFree.";
+  "Frontend developer — React, Next.js & TypeScript. 3+ years at 3Embed building fast, SEO-friendly commerce storefronts: Qykly, Paris Panini, TrulyFree.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(url),
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Anubhav Singh", url }],
   creator: "Anubhav Singh",
+  publisher: "Anubhav Singh",
   alternates: { canonical: "/" },
   robots: {
     index: true,

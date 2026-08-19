@@ -62,7 +62,7 @@ function Visual({ p, onOpen }: { p: Project; onOpen: (src: string, label: string
         </div>
         {p.image ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img className="shot-img" src={p.image} alt={`${p.name} screenshot`} loading="lazy" onClick={() => onOpen(p.image!, "Homepage")} />
+          <img className="shot-img" src={p.image} alt={`${p.name} — homepage screenshot`} title={`${p.name} — Homepage`} loading="lazy" onClick={() => onOpen(p.image!, "Homepage")} />
         ) : (
           <div className="shot-ph">
             <span className="grid size-11 place-items-center rounded-xl border border-line bg-white/5">
