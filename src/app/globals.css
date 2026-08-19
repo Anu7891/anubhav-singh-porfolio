@@ -62,7 +62,9 @@
 }
 .btn-outline:hover { border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
 
-html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+/* Single source of scroll offset for in-page anchors (nav is ~56px tall).
+   Sections no longer set scroll-margin-top, so this doesn't double up. */
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 
 body {
   background-color: var(--bg);

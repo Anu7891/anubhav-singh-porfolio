@@ -18,7 +18,7 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} aria-label={ariaLabel} className={`scroll-mt-24 py-16 md:py-24 ${className}`}>
+    <section id={id} aria-label={ariaLabel} className={`py-12 md:py-16 ${className}`}>
       <div className={innerClassName}>{children}</div>
     </section>
   );

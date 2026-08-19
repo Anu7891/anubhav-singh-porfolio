@@ -4,7 +4,7 @@ import { articles } from "@/lib/data";
 
 export function Writing() {
   return (
-    <section id="writing" className="scroll-mt-24 py-16 md:py-24">
+    <section id="writing" className="py-12 md:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           label="Writing"
