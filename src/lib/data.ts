@@ -165,11 +165,9 @@ export const projects: Project[] = [
     tech: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Razorpay", "Typesense", "SSR / SSG", "i18n"],
     image: "/projects/paris-home.png",
     shots: [
-      { label: "menu", src: "/projects/paris-menu.png" },
       { label: "listing", src: "/projects/paris-listing.png" },
       { label: "product", src: "/projects/paris-product.png" },
       { label: "cart", src: "/projects/paris-cart.png" },
-      { label: "orders", src: "/projects/paris-orders.png" },
       { label: "wallet", src: "/projects/paris-wallet.png" },
     ],
     tint: "indigo",
@@ -208,10 +206,6 @@ export const projects: Project[] = [
       { label: "pdp", src: "/projects/truly-product.png" },
       { label: "cart", src: "/projects/truly-cart.png" },
       { label: "checkout", src: "/projects/truly-checkout.png" },
-      { label: "profile", src: "/projects/truly-profile.png" },
-      { label: "orders", src: "/projects/truly-orders.png" },
-      { label: "referrals", src: "/projects/truly-referrals.png" },
-      { label: "chat", src: "/projects/truly-chat.png" },
     ],
     tint: "cyan",
     overview: {
