@@ -124,7 +124,7 @@ export const projects: Project[] = [
     category: "B2B commerce",
     kind: "corporate gifting SaaS",
     description:
-      "A B2B corporate-gifting storefront on the multi-tenant Qykly platform. Businesses browse a curated catalog, build their own premium gift hampers with a step-by-step builder, and check out with GST-ready billing and delivery or pickup. Next.js App Router with Redux Toolkit, a Puck page builder, Typesense instant search, i18next localization and a custom type-safe form system.",
+      "A B2B corporate-gifting storefront on the multi-tenant Qykly platform. Businesses browse a curated catalog, build their own premium gift hampers and customize products, then check out with GST-ready billing and delivery or pickup. I built the Puck-driven homepage, PLP, PDP, hamper and product-customization flows and checkout, and extended the React admin with pricing and customization modules. Next.js App Router with Redux Toolkit, a Puck page builder, Typesense instant search, i18next localization and a custom type-safe form system.",
     tech: ["Next.js 14", "TypeScript", "Redux Toolkit", "Radix UI", "Framer Motion", "Zod", "i18next", "Puck", "Docker"],
     image: "/projects/qykly-home.png",
     shots: [
@@ -136,21 +136,23 @@ export const projects: Project[] = [
     tint: "cyan",
     overview: {
       summary:
-        "Qykly is a B2B corporate-gifting platform. Businesses browse a curated catalog, assemble their own premium hampers with a guided builder, and place orders with GST-ready billing and delivery or pickup. I worked on the storefront front end as part of a 3-person frontend team — built on Next.js with Redux Toolkit, a Puck-driven page builder and a custom type-safe form system.",
+        "Qykly is a B2B corporate-gifting platform. Businesses browse a curated catalog, assemble their own premium hampers with a guided builder, customize products, and place orders with GST-ready billing and delivery or pickup. As part of a 3-person frontend team I worked end-to-end — the Puck-driven homepage, product listing and detail pages, the hamper and product-customization flows and checkout — and extended the React admin panel with modules for customization pricing, hamper customization and product customization. Built on Next.js with Redux Toolkit and a custom type-safe form system.",
       role: "Frontend Developer · 3-person frontend team",
       timeline: "2024–2025 · 3Embed (Qykly)",
       platform: "Qykly multi-tenant SaaS",
       highlights: [
-        "Multi-tenant setup — each tenant gets a themeable, localized store.",
+        "Puck-driven homepage — reusable blocks the team edits visually, no code changes.",
         "Build-your-own-hamper flow — a step-by-step builder for custom corporate gifts.",
-        "GST-ready checkout with billing/shipping addresses and delivery or pickup.",
-        "Puck-based page builder and a custom type-safe form system — no form library.",
+        "Product customization and GST-ready checkout with delivery or pickup.",
+        "Extended the React admin with 3 self-serve modules — customization pricing, hamper and product customization — so the business manages options without a developer.",
       ],
       features: [
-        { title: "Product listing", body: "Category, brand and price filters with instant Typesense search." },
-        { title: "Product pages", body: "Variants, pricing and add-to-cart on a clean PDP." },
-        { title: "Hamper builder", body: "Guided flow to assemble custom gift hampers at scale." },
+        { title: "Homepage (Puck)", body: "Visual page builder with reusable blocks — content and layout editable without code." },
+        { title: "PLP & PDP", body: "Listings with Typesense search, filters, variants and add-to-cart." },
+        { title: "Hamper & customization", body: "Guided flow to assemble custom hampers and personalize products at scale." },
         { title: "Checkout", body: "GST billing, delivery/pickup and an itemized order summary." },
+        { title: "Admin — pricing", body: "New module to configure how customization options are priced." },
+        { title: "Admin — customization", body: "Modules to manage hamper and product customization options end-to-end." },
       ],
       stack: ["Next.js 14", "TypeScript", "Redux Toolkit", "Radix UI", "Framer Motion", "Zod", "i18next", "Puck", "Docker"],
     },
