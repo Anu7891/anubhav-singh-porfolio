@@ -125,7 +125,7 @@ export const projects: Project[] = [
     category: "B2B commerce",
     kind: "corporate gifting SaaS",
     description:
-      "A B2B corporate-gifting storefront on the multi-tenant Qykly platform. Businesses browse a curated catalog, build their own premium gift hampers and customize products, then check out with GST-ready billing and delivery or pickup. I built the Puck-driven homepage, PLP, PDP, hamper and product-customization flows and checkout, and extended the React admin with pricing and customization modules. Next.js App Router with Redux Toolkit, a Puck page builder, Typesense instant search, i18next localization and a custom type-safe form system.",
+      "A B2B corporate-gifting storefront on the multi-tenant Qykly platform. Businesses browse a curated catalog, build their own premium gift hampers and customize products, then check out with GST-ready billing and delivery or pickup. A Puck-driven homepage, PLP, PDP, hamper and product-customization flows and checkout, plus a React admin with pricing and customization modules. Next.js App Router with Redux Toolkit, a Puck page builder, Typesense instant search, i18next localization and a custom type-safe form system.",
     tech: ["Next.js 14", "TypeScript", "Redux Toolkit", "Radix UI", "Framer Motion", "Zod", "i18next", "Puck", "Docker"],
     image: "/projects/qykly-home.png",
     shots: [
