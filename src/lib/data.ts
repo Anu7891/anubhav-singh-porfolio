@@ -136,8 +136,8 @@ export const projects: Project[] = [
     tint: "cyan",
     overview: {
       summary:
-        "Qykly is a B2B corporate-gifting platform. Businesses browse a curated catalog, assemble their own premium hampers with a guided builder, and place orders with GST-ready billing and delivery or pickup. I worked on the storefront front end as part of a small team — built on Next.js with Redux Toolkit, a Puck-driven page builder and a custom type-safe form system.",
-      role: "Frontend Developer · small team (2–3)",
+        "Qykly is a B2B corporate-gifting platform. Businesses browse a curated catalog, assemble their own premium hampers with a guided builder, and place orders with GST-ready billing and delivery or pickup. I worked on the storefront front end as part of a 3-person frontend team — built on Next.js with Redux Toolkit, a Puck-driven page builder and a custom type-safe form system.",
+      role: "Frontend Developer · 3-person frontend team",
       timeline: "2024–2025 · 3Embed (Qykly)",
       platform: "Qykly multi-tenant SaaS",
       highlights: [
@@ -163,13 +163,20 @@ export const projects: Project[] = [
     description:
       "A French-inspired food-ordering storefront (Bengaluru) built on the NewKommerce platform — menu browsing, product pages, online ordering and events, wrapped in a warm, on-brand storefront with a fast, SEO-friendly front end.",
     tech: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Razorpay", "Typesense", "SSR / SSG", "i18n"],
-    image: "/projects/parispanni.jpg",
-    shots: [{ label: "menu" }, { label: "product" }, { label: "cart" }, { label: "checkout" }],
+    image: "/projects/paris-home.png",
+    shots: [
+      { label: "menu", src: "/projects/paris-menu.png" },
+      { label: "listing", src: "/projects/paris-listing.png" },
+      { label: "product", src: "/projects/paris-product.png" },
+      { label: "cart", src: "/projects/paris-cart.png" },
+      { label: "orders", src: "/projects/paris-orders.png" },
+      { label: "wallet", src: "/projects/paris-wallet.png" },
+    ],
     tint: "indigo",
     overview: {
       summary:
-        "A French-inspired food-ordering storefront in Bengaluru, built on the NewKommerce platform. It's a fast, SEO-friendly Next.js front end where guests browse the menu, open product pages, order online and see events, wrapped in a warm, on-brand look. I worked on the front end as part of a small team.",
-      role: "Frontend Developer · small team (2–3)",
+        "A French-inspired food-ordering storefront in Bengaluru, built on the NewKommerce platform. It's a fast, SEO-friendly Next.js front end where guests browse the menu, open product pages, order online and see events, wrapped in a warm, on-brand look. I worked on the front end as part of a 3-person frontend team.",
+      role: "Frontend Developer · 3-person frontend team",
       timeline: "2024 · 3Embed (NewKommerce)",
       platform: "NewKommerce commerce platform",
       highlights: [
@@ -191,17 +198,16 @@ export const projects: Project[] = [
     name: "TrulyFree",
     url: "https://trulyfree.com/",
     category: "E-commerce",
-    kind: "live shopping",
+    kind: "membership marketplace",
     description:
-      "Feature-rich commerce storefront with multi-gateway checkout (Stripe, Google Pay, Apple Pay), Algolia search, LiveKit live-shopping streams, in-app chat, Gemini-powered assistance and GrowthBook feature flags. Redux-Saga data flow with Sentry monitoring for production reliability.",
-    tech: ["Next.js 12", "React 18", "Redux Saga", "Algolia", "Stripe", "Apple Pay", "Google Pay", "LiveKit", "Sentry"],
+      "Feature-rich commerce storefront with multi-gateway checkout (Stripe, Google Pay, Apple Pay), Algolia search, in-app chat, Gemini-powered assistance and GrowthBook feature flags. Redux-Saga data flow with Sentry monitoring for production reliability.",
+    tech: ["Next.js 12", "React 18", "Redux Saga", "Algolia", "Stripe", "Apple Pay", "Google Pay", "GrowthBook", "Sentry"],
     image: "/projects/truly-home.png",
     shots: [
       { label: "plp", src: "/projects/truly-shop.png" },
       { label: "pdp", src: "/projects/truly-product.png" },
       { label: "cart", src: "/projects/truly-cart.png" },
       { label: "checkout", src: "/projects/truly-checkout.png" },
-      { label: "social", src: "/projects/truly-live.png" },
       { label: "profile", src: "/projects/truly-profile.png" },
       { label: "orders", src: "/projects/truly-orders.png" },
       { label: "referrals", src: "/projects/truly-referrals.png" },
@@ -210,23 +216,23 @@ export const projects: Project[] = [
     tint: "cyan",
     overview: {
       summary:
-        "TrulyFree is a US marketplace for better, non-toxic products with a membership and cash-back model. Shoppers browse hundreds of brands, watch a social/live-shopping feed, and check out with express payments. I worked on the storefront front end as part of a small team — Redux-Saga data flow, Algolia search and LiveKit-powered live shopping, with Sentry monitoring in production.",
-      role: "Frontend Developer · small team (2–3)",
+        "TrulyFree is a US marketplace for better, non-toxic products with a membership and cash-back model. Shoppers browse hundreds of brands and check out with express payments. I worked on the storefront front end as part of a 5-person frontend team — Redux-Saga data flow, Algolia search and multi-gateway express checkout, with Sentry monitoring in production.",
+      role: "Frontend Developer · 5-person frontend team",
       timeline: "2023–2024 · 3Embed (TrulyFree)",
       platform: "TrulyFree marketplace",
       highlights: [
         "Membership + cash-back pricing shown across listings, cart and checkout.",
         "Express multi-gateway checkout — Apple Pay, Google Pay and card.",
-        "Social / live-shopping feed with LiveKit streams and in-app engagement.",
+        "In-app chat and Gemini-powered shopping assistance for support.",
         "Algolia instant search with rich filters (badges, price, shipping).",
       ],
       features: [
         { title: "Shop & filters", body: "Category listings with badge, price and shipping filters, Algolia-powered." },
         { title: "Product pages", body: "Bundles, member vs non-member pricing and cash-back, add-to-cart." },
-        { title: "Live & social", body: "TikTok-style trending video feed with follow, like and share." },
+        { title: "Account & rewards", body: "Order history, referrals and cash-back tracked in the member account." },
         { title: "Checkout", body: "Express Apple Pay / Google Pay plus contact and shipping, with an order summary." },
       ],
-      stack: ["Next.js 12", "React 18", "Redux-Saga", "Algolia", "Stripe", "Apple Pay", "Google Pay", "LiveKit", "Sentry"],
+      stack: ["Next.js 12", "React 18", "Redux-Saga", "Algolia", "Stripe", "Apple Pay", "Google Pay", "GrowthBook", "Sentry"],
     },
     // tint kept in the indigo/cyan family for a consistent, symmetric palette
   },
