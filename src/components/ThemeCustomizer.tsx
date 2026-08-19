@@ -22,6 +22,7 @@ const presets: Preset[] = [
 
 const KEY_A = "accent";
 const KEY_B = "accent2";
+const KEY_HINT = "theme-hint-seen";
 
 function lighten(hex: string, amt: number) {
   const n = parseInt(hex.replace("#", ""), 16);
@@ -42,8 +43,11 @@ function apply(a: string, b: string) {
 export function ThemeCustomizer() {
   const [open, setOpen] = useState(false);
   const [accent, setAccent] = useState(presets[0].a);
+  const [hint, setHint] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
+
+  const isCustom = !presets.some((p) => p.a.toLowerCase() === accent.toLowerCase());
 
   // Restore saved colours on mount.
   useEffect(() => {
@@ -54,6 +58,18 @@ export function ThemeCustomizer() {
       setAccent(a);
     }
   }, []);
+
+  // First-visit nudge so visitors discover they can recolour the site.
+  useEffect(() => {
+    if (localStorage.getItem(KEY_HINT)) return;
+    const t = setTimeout(() => setHint(true), 1600);
+    return () => clearTimeout(t);
+  }, []);
+
+  const dismissHint = () => {
+    setHint(false);
+    localStorage.setItem(KEY_HINT, "1");
+  };
 
   // Close on outside click / Escape.
   useEffect(() => {
@@ -71,6 +87,11 @@ export function ThemeCustomizer() {
       document.removeEventListener("keydown", onKey);
     };
   }, [open]);
+
+  const toggle = () => {
+    dismissHint();
+    setOpen((o) => !o);
+  };
 
   const pick = (a: string, b: string) => {
     apply(a, b);
@@ -90,32 +111,77 @@ export function ThemeCustomizer() {
 
   return (
     <>
-      <button
-        ref={btnRef}
-        onClick={() => setOpen((o) => !o)}
-        aria-label="Customize theme colour"
-        aria-expanded={open}
-        className="fixed bottom-7 left-7 z-40 flex size-13 items-center justify-center rounded-full border border-line bg-panel text-ink shadow-lg backdrop-blur-md transition-transform hover:scale-105"
-      >
-        <span className="size-5 rounded-full bg-gradient-to-br from-indigo to-cyan" aria-hidden="true" />
-      </button>
+      <div className="fixed bottom-7 left-7 z-40">
+        <button
+          ref={btnRef}
+          onClick={toggle}
+          aria-label="Customize theme colour"
+          aria-expanded={open}
+          className="group relative flex size-13 items-center justify-center rounded-full border border-line bg-panel text-ink shadow-lg backdrop-blur-md transition-transform hover:scale-105"
+        >
+          {/* Pulsing ring draws the eye on first visit. */}
+          {hint ? (
+            <span
+              className="absolute inset-0 animate-ping rounded-full opacity-70"
+              style={{ background: `linear-gradient(135deg, var(--accent), var(--accent-2))` }}
+              aria-hidden="true"
+            />
+          ) : null}
+          <span
+            className="relative size-5 rounded-full transition-transform group-hover:rotate-45"
+            style={{ background: `linear-gradient(135deg, var(--accent), var(--accent-2))` }}
+            aria-hidden="true"
+          />
+        </button>
+
+        {/* First-visit guidance bubble. */}
+        {hint && !open ? (
+          <div
+            role="status"
+            className="absolute bottom-1.5 left-16 w-max max-w-[220px] animate-fade-in rounded-2xl border border-line bg-bg px-3.5 py-2.5 shadow-xl"
+          >
+            <p className="text-[13px] font-medium text-ink">🎨 Make it yours</p>
+            <p className="mt-0.5 text-xs text-muted">Pick an accent — the whole site recolours live.</p>
+            <button
+              onClick={dismissHint}
+              className="mt-2 text-[11px] font-semibold text-muted transition-colors hover:text-ink"
+            >
+              Got it
+            </button>
+            <span
+              className="absolute top-1/2 -left-1.5 size-3 -translate-y-1/2 rotate-45 border-b border-l border-line bg-bg"
+              aria-hidden="true"
+            />
+          </div>
+        ) : null}
+      </div>
 
       {open ? (
         <div
           ref={panelRef}
           role="dialog"
           aria-label="Theme customizer"
-          className="fixed bottom-24 left-7 z-40 w-[min(300px,calc(100vw-3.5rem))] rounded-3xl border border-line bg-bg p-5 shadow-2xl"
+          className="fixed bottom-24 left-7 z-40 w-[min(300px,calc(100vw-3.5rem))] animate-fade-in rounded-3xl border border-line bg-bg/95 p-5 shadow-2xl backdrop-blur-xl"
         >
           <div className="flex items-center justify-between">
-            <p className="text-sm font-semibold text-ink">Theme colour</p>
-            <button onClick={reset} className="text-xs text-muted transition-colors hover:text-ink">
+            <div className="flex items-center gap-2.5">
+              <span
+                className="size-6 rounded-full ring-2 ring-line"
+                style={{ background: `linear-gradient(135deg, var(--accent), var(--accent-2))` }}
+                aria-hidden="true"
+              />
+              <p className="text-sm font-semibold text-ink">Theme colour</p>
+            </div>
+            <button
+              onClick={reset}
+              className="rounded-full px-2.5 py-1 text-xs text-muted transition-colors hover:bg-panel-strong hover:text-ink"
+            >
               Reset
             </button>
           </div>
-          <p className="mt-1 text-xs text-muted">Pick an accent — the whole site updates live.</p>
+          <p className="mt-1.5 text-xs text-muted">Pick an accent — the whole site updates live.</p>
 
-          <div className="mt-4 grid grid-cols-3 gap-3">
+          <div className="mt-4 grid grid-cols-3 gap-2.5">
             {presets.map((p) => {
               const active = accent.toLowerCase() === p.a.toLowerCase();
               return (
@@ -124,30 +190,59 @@ export function ThemeCustomizer() {
                   onClick={() => pick(p.a, p.b)}
                   aria-label={p.name}
                   aria-pressed={active}
-                  className={`flex flex-col items-center gap-1.5 rounded-xl border p-2 transition-colors ${
-                    active ? "border-indigo/60 bg-panel-strong" : "border-line hover:border-indigo/40"
+                  className={`group flex flex-col items-center gap-2 rounded-2xl border p-2.5 transition-all ${
+                    active
+                      ? "border-transparent bg-panel-strong shadow-sm ring-2 ring-[var(--accent)]"
+                      : "border-line hover:-translate-y-0.5 hover:border-[var(--accent)]/40 hover:bg-panel"
                   }`}
                 >
                   <span
-                    className="size-8 rounded-full"
+                    className="relative flex size-9 items-center justify-center rounded-full shadow-inner transition-transform group-hover:scale-105"
                     style={{ background: `linear-gradient(135deg, ${p.a}, ${p.b})` }}
                     aria-hidden="true"
-                  />
-                  <span className="text-[11px] text-muted">{p.name}</span>
+                  >
+                    {active ? (
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                        <path
+                          d="m3.5 8.5 3 3 6-7"
+                          stroke="#fff"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    ) : null}
+                  </span>
+                  <span
+                    className={`text-[11px] font-medium transition-colors ${
+                      active ? "text-ink" : "text-muted"
+                    }`}
+                  >
+                    {p.name}
+                  </span>
                 </button>
               );
             })}
           </div>
 
-          <label className="mt-4 flex items-center justify-between rounded-xl border border-line px-3 py-2.5">
-            <span className="text-sm text-ink">Custom colour</span>
-            <input
-              type="color"
-              value={accent}
-              onChange={(e) => pickCustom(e.target.value)}
-              aria-label="Custom accent colour"
-              className="size-8 cursor-pointer rounded-md border border-line bg-transparent"
-            />
+          <label
+            className={`mt-4 flex cursor-pointer items-center justify-between rounded-2xl border px-3.5 py-3 transition-colors ${
+              isCustom ? "border-transparent bg-panel-strong ring-2 ring-[var(--accent)]" : "border-line hover:bg-panel"
+            }`}
+          >
+            <span className="flex flex-col">
+              <span className="text-sm font-medium text-ink">Custom colour</span>
+              <span className="text-[11px] text-muted">Tap the swatch to fine-tune</span>
+            </span>
+            <span className="relative size-8 overflow-hidden rounded-lg ring-2 ring-line">
+              <input
+                type="color"
+                value={accent}
+                onChange={(e) => pickCustom(e.target.value)}
+                aria-label="Custom accent colour"
+                className="absolute -inset-2 size-[calc(100%+1rem)] cursor-pointer border-0 bg-transparent p-0"
+              />
+            </span>
           </label>
         </div>
       ) : null}
