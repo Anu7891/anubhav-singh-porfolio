@@ -182,7 +182,7 @@ const labelNames: Record<string, string> = {
   pdp: "Product page", cart: "Cart", checkout: "Checkout", builder: "Hamper builder",
   shop: "Shop", live: "Live shopping", social: "Social feed", profile: "Profile",
   orders: "My orders", referrals: "Referrals", chat: "Messages", combo: "Combos", catalog: "Catalog",
-  wallet: "Wallet", listing: "Menu listing",
+  wallet: "Wallet",
 };
 const prettyLabel = (l: string) => labelNames[l] ?? l.charAt(0).toUpperCase() + l.slice(1);
 
