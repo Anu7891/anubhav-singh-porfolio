@@ -164,8 +164,8 @@ export const projects: Project[] = [
     category: "Food commerce",
     kind: "NewKommerce",
     description:
-      "A French-inspired food-ordering storefront (Bengaluru) built on the NewKommerce platform — menu browsing, product pages, online ordering and events, wrapped in a warm, on-brand storefront with a fast, SEO-friendly front end.",
-    tech: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Razorpay", "Typesense", "SSR / SSG", "i18n"],
+      "A French-inspired food-ordering storefront (Bengaluru) built on the multi-tenant NewKommerce platform — a Puck-driven homepage, Typesense-powered menu filtering, add-to-cart, product offers, dual-gateway checkout (Stripe + Razorpay) and real-time order updates over WebSocket, on a fast, SEO-friendly Next.js front end.",
+    tech: ["Next.js", "React", "TypeScript", "Redux Toolkit", "TanStack Query", "Typesense", "Stripe", "Razorpay", "Puck", "WebSocket", "Tailwind CSS"],
     image: "/projects/paris-home.png",
     shots: [
       { label: "listing", src: "/projects/paris-listing.png" },
@@ -176,23 +176,23 @@ export const projects: Project[] = [
     tint: "indigo",
     overview: {
       summary:
-        "A French-inspired food-ordering storefront in Bengaluru, built on the NewKommerce platform. It's a fast, SEO-friendly Next.js front end where guests browse the menu, open product pages, order online and see events, wrapped in a warm, on-brand look. I worked on the front end as part of a 3-person frontend team.",
+        "A French-inspired food-ordering storefront in Bengaluru, built on the multi-tenant NewKommerce platform (one env-driven codebase powering several brands). As part of a 3-person frontend team I built the Puck-driven homepage and About page, Typesense filtering on the product listing, the add-to-cart flow and product offers, dual-gateway checkout with Stripe and Razorpay, and real-time order-status updates over WebSocket.",
       role: "Frontend Developer · 3-person frontend team",
       timeline: "2024 · 3Embed (NewKommerce)",
-      platform: "NewKommerce commerce platform",
+      platform: "NewKommerce multi-tenant SaaS",
       highlights: [
-        "SEO-friendly setup — static generation, structured data and clean menu URLs.",
-        "Menu, product and online-ordering flows tuned for a fast, mobile-first audience.",
-        "Warm, on-brand styling mapped to the brand's identity.",
-        "Reused the shared NewKommerce component library and Redux layer — cut build time and kept the UI consistent with the platform.",
+        "Puck-driven homepage and About page — reusable blocks the content team edits without code.",
+        "Typesense instant, typo-tolerant filtering on the menu/product listing.",
+        "Add-to-cart flow and product offers/discounts on a shared Redux cart layer.",
+        "Dual-gateway checkout (Stripe global + Razorpay India UPI) with real-time order status over WebSocket.",
       ],
       features: [
-        { title: "Menu browsing", body: "Category-driven menu with fast filtering and image-forward cards." },
-        { title: "Product pages", body: "Item pages with variants, add-ons and clear pricing, wired to the cart." },
-        { title: "Online ordering", body: "Cart and checkout on the NewKommerce order flow, mobile-first." },
-        { title: "Events & content", body: "On-brand sections for events and the brand story, kept SEO-friendly." },
+        { title: "Homepage (Puck)", body: "Visual page builder with reusable blocks — content editable without code, SSG + ISR for speed and SEO." },
+        { title: "Menu & filters", body: "Typesense-powered instant, typo-tolerant filtering across categories, price and attributes." },
+        { title: "Cart & offers", body: "Add-to-cart with quantity/variants and product offers applied through a shared Redux slice." },
+        { title: "Checkout & real-time", body: "Stripe + Razorpay payments, with live order-status updates pushed over WebSocket." },
       ],
-      stack: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "Razorpay", "Typesense", "i18n", "SSG / SEO", "Structured data"],
+      stack: ["Next.js", "React", "TypeScript", "Redux Toolkit", "TanStack Query", "Typesense", "Stripe", "Razorpay", "Puck", "WebSocket", "Tailwind CSS", "SSG / ISR"],
     },
   },
   {
