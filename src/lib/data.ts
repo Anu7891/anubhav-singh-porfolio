@@ -120,6 +120,43 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    name: "Paris Panini",
+    url: "https://parispanniblr.newkommerce.com/",
+    category: "Food commerce",
+    kind: "NewKommerce",
+    description:
+      "A London-based food-ordering storefront serving authentic British cuisine, built on the multi-tenant NewKommerce platform — a Puck-driven homepage, Typesense-powered menu filtering, add-to-cart, product offers, dual-gateway checkout (Stripe + Razorpay) and real-time order updates over WebSocket, on a fast, SEO-friendly Next.js front end.",
+    tech: ["Next.js", "React", "TypeScript", "Redux Toolkit", "TanStack Query", "Typesense", "Stripe", "Razorpay", "Puck", "WebSocket", "Tailwind CSS"],
+    image: "/projects/paris-home.png",
+    shots: [
+      { label: "listing", src: "/projects/paris-listing.png" },
+      { label: "product", src: "/projects/paris-product.png" },
+      { label: "cart", src: "/projects/paris-cart.png" },
+      { label: "wallet", src: "/projects/paris-wallet.png" },
+    ],
+    tint: "indigo",
+    overview: {
+      summary:
+        "A London-based food-ordering storefront serving authentic British cuisine, built on the multi-tenant NewKommerce platform (one env-driven codebase powering several brands). As part of a 3-person frontend team I built the Puck-driven homepage and About page, Typesense filtering on the product listing, the add-to-cart flow and product offers, dual-gateway checkout with Stripe and Razorpay, and real-time order-status updates over WebSocket.",
+      role: "Frontend Developer · 3-person frontend team",
+      timeline: "2024 · 3Embed (NewKommerce)",
+      platform: "NewKommerce multi-tenant SaaS",
+      highlights: [
+        "Puck-driven homepage and About page — reusable blocks the content team edits without code.",
+        "Typesense instant, typo-tolerant filtering on the menu/product listing.",
+        "Add-to-cart flow and product offers/discounts on a shared Redux cart layer.",
+        "Dual-gateway checkout (Stripe global + Razorpay India UPI) with real-time order status over WebSocket.",
+      ],
+      features: [
+        { title: "Homepage (Puck)", body: "Visual page builder with reusable blocks — content editable without code, SSG + ISR for speed and SEO." },
+        { title: "Menu & filters", body: "Typesense-powered instant, typo-tolerant filtering across categories, price and attributes." },
+        { title: "Cart & offers", body: "Add-to-cart with quantity/variants and product offers applied through a shared Redux slice." },
+        { title: "Checkout & real-time", body: "Stripe + Razorpay payments, with live order-status updates pushed over WebSocket." },
+      ],
+      stack: ["Next.js", "React", "TypeScript", "Redux Toolkit", "TanStack Query", "Typesense", "Stripe", "Razorpay", "Puck", "WebSocket", "Tailwind CSS", "SSG / ISR"],
+    },
+  },
+  {
     name: "Qykly",
     url: "https://staging.qykly.com/en",
     category: "B2B commerce",
@@ -156,43 +193,6 @@ export const projects: Project[] = [
         { title: "Admin — customization", body: "Modules to manage hamper and product customization options end-to-end." },
       ],
       stack: ["Next.js 14", "TypeScript", "Redux Toolkit", "Radix UI", "Framer Motion", "Zod", "i18next", "Puck", "Docker"],
-    },
-  },
-  {
-    name: "Paris Panini",
-    url: "https://parispanniblr.newkommerce.com/",
-    category: "Food commerce",
-    kind: "NewKommerce",
-    description:
-      "A French-inspired food-ordering storefront (Bengaluru) built on the multi-tenant NewKommerce platform — a Puck-driven homepage, Typesense-powered menu filtering, add-to-cart, product offers, dual-gateway checkout (Stripe + Razorpay) and real-time order updates over WebSocket, on a fast, SEO-friendly Next.js front end.",
-    tech: ["Next.js", "React", "TypeScript", "Redux Toolkit", "TanStack Query", "Typesense", "Stripe", "Razorpay", "Puck", "WebSocket", "Tailwind CSS"],
-    image: "/projects/paris-home.png",
-    shots: [
-      { label: "listing", src: "/projects/paris-listing.png" },
-      { label: "product", src: "/projects/paris-product.png" },
-      { label: "cart", src: "/projects/paris-cart.png" },
-      { label: "wallet", src: "/projects/paris-wallet.png" },
-    ],
-    tint: "indigo",
-    overview: {
-      summary:
-        "A French-inspired food-ordering storefront in Bengaluru, built on the multi-tenant NewKommerce platform (one env-driven codebase powering several brands). As part of a 3-person frontend team I built the Puck-driven homepage and About page, Typesense filtering on the product listing, the add-to-cart flow and product offers, dual-gateway checkout with Stripe and Razorpay, and real-time order-status updates over WebSocket.",
-      role: "Frontend Developer · 3-person frontend team",
-      timeline: "2024 · 3Embed (NewKommerce)",
-      platform: "NewKommerce multi-tenant SaaS",
-      highlights: [
-        "Puck-driven homepage and About page — reusable blocks the content team edits without code.",
-        "Typesense instant, typo-tolerant filtering on the menu/product listing.",
-        "Add-to-cart flow and product offers/discounts on a shared Redux cart layer.",
-        "Dual-gateway checkout (Stripe global + Razorpay India UPI) with real-time order status over WebSocket.",
-      ],
-      features: [
-        { title: "Homepage (Puck)", body: "Visual page builder with reusable blocks — content editable without code, SSG + ISR for speed and SEO." },
-        { title: "Menu & filters", body: "Typesense-powered instant, typo-tolerant filtering across categories, price and attributes." },
-        { title: "Cart & offers", body: "Add-to-cart with quantity/variants and product offers applied through a shared Redux slice." },
-        { title: "Checkout & real-time", body: "Stripe + Razorpay payments, with live order-status updates pushed over WebSocket." },
-      ],
-      stack: ["Next.js", "React", "TypeScript", "Redux Toolkit", "TanStack Query", "Typesense", "Stripe", "Razorpay", "Puck", "WebSocket", "Tailwind CSS", "SSG / ISR"],
     },
   },
   {
