@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { SectionHeader } from "../ui/SectionHeader";
 import { Reveal } from "../ui/Reveal";
 import { Section } from "../ui/Section";
@@ -28,13 +28,6 @@ function ImgIcon() {
     </svg>
   );
 }
-function PlusIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} width={16} height={16} aria-hidden="true">
-      <path d="M12 5v14M5 12h14" strokeLinecap="round" />
-    </svg>
-  );
-}
 function ArrowIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} width={15} height={15} aria-hidden="true">
@@ -53,93 +46,18 @@ function ExpandIcon() {
 function Visual({ p, onOpen }: { p: Project; onOpen: (src: string, label: string) => void }) {
   return (
     <div className="proj-visual" style={{ "--tint-a": tintA[p.tint], "--tint-b": tintB[p.tint] } as CSSProperties}>
-      <div className="browser-frame">
-        <div className="browser-bar">
-          <span className="browser-dot" style={{ background: "#ff5f57" }} />
-          <span className="browser-dot" style={{ background: "#febc2e" }} />
-          <span className="browser-dot" style={{ background: "#28c840" }} />
-          <span className="browser-url">{host(p.url)}</span>
+      {p.image ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img className="proj-shot" src={p.image} alt={`${p.name} — preview`} loading="lazy" onClick={() => onOpen(p.image!, p.name)} />
+      ) : (
+        <div className="shot-ph">
+          <span className="grid size-11 place-items-center rounded-xl border border-line bg-white/5">
+            <ImgIcon />
+          </span>
+          <span className="text-[12.5px] text-muted">Add project image</span>
+          <span className="font-mono text-[10.5px] text-muted/70">{host(p.url)}</span>
         </div>
-        {p.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img className="shot-img" src={p.image} alt={`${p.name} — homepage screenshot`} title={`${p.name} — Homepage`} loading="lazy" onClick={() => onOpen(p.image!, "Homepage")} />
-        ) : (
-          <div className="shot-ph">
-            <span className="grid size-11 place-items-center rounded-xl border border-line bg-white/5">
-              <ImgIcon />
-            </span>
-            <span className="text-[12.5px] text-muted">Add homepage screenshot</span>
-            <span className="font-mono text-[10.5px] text-muted/70">{host(p.url)}</span>
-          </div>
-        )}
-      </div>
-      <ThumbCarousel p={p} onOpen={onOpen} />
-    </div>
-  );
-}
-
-function ChevronIcon({ dir }: { dir: "left" | "right" }) {
-  return (
-    <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="currentColor" strokeWidth={2.2} aria-hidden="true">
-      <path d={dir === "left" ? "M15 6l-6 6 6 6" : "M9 6l6 6-6 6"} strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function ThumbCarousel({ p, onOpen }: { p: Project; onOpen: (src: string, label: string) => void }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
-
-  const update = () => {
-    const el = ref.current;
-    if (!el) return;
-    setAtStart(el.scrollLeft <= 2);
-    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
-  };
-
-  useEffect(() => {
-    update();
-    const el = ref.current;
-    if (!el) return;
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const scroll = (dir: number) => {
-    const el = ref.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
-  };
-
-  const showArrows = p.shots.filter((s) => s.src).length > 4;
-
-  return (
-    <div className="thumb-carousel">
-      <div className="thumb-strip" ref={ref} onScroll={update}>
-        {p.shots.map((s, i) =>
-          s.src ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={i} className="thumb-img" src={s.src} alt={`${p.name} — ${s.label}`} title={prettyLabel(s.label)} loading="lazy" onClick={() => onOpen(s.src!, prettyLabel(s.label))} />
-          ) : (
-            <div key={i} className="thumb-slot" title={`Add ${s.label} screenshot`}>
-              <PlusIcon />
-              <span className="t">{s.label}</span>
-            </div>
-          ),
-        )}
-      </div>
-      {showArrows ? (
-        <>
-          <button type="button" className="thumb-arrow prev" data-hidden={atStart} aria-label="Previous thumbnails" onClick={() => scroll(-1)}>
-            <ChevronIcon dir="left" />
-          </button>
-          <button type="button" className="thumb-arrow next" data-hidden={atEnd} aria-label="More thumbnails" onClick={() => scroll(1)}>
-            <ChevronIcon dir="right" />
-          </button>
-        </>
-      ) : null}
+      )}
     </div>
   );
 }
