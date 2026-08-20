@@ -83,7 +83,7 @@ export const skillHighlights = {
 
 export const skillCategories = [
   { title: "Frontend & frameworks", icon: "code", pills: ["React 19", "Next.js", "App Router", "Server Components", "TypeScript", "JavaScript ES6+", "HTML5", "CSS3"] },
-  { title: "State & data", icon: "data", pills: ["Redux Toolkit", "Redux-Saga", "Zustand", "TanStack Query", "Context API", "RxJS", "React Hook Form", "Zod"] },
+  { title: "State & data", icon: "data", pills: ["Redux Toolkit", "Redux-Saga", "Zustand", "Context API", "RxJS", "React Hook Form", "Zod"] },
   { title: "Styling & UI", icon: "paint", pills: ["Tailwind CSS", "Material-UI", "Emotion", "styled-components", "Radix UI", "Framer Motion", "Swiper", "SCSS/Sass"] },
   { title: "Commerce & search", icon: "cart", pills: ["Stripe", "Razorpay", "Google Pay", "Apple Pay", "Algolia", "Typesense", "Puck CMS", "i18next"] },
   { title: "Real-time & media", icon: "wifi", pills: ["MQTT", "WebSockets", "LiveKit", "Socket.IO"] },
@@ -125,8 +125,8 @@ export const projects: Project[] = [
     category: "Food commerce",
     kind: "NewKommerce",
     description:
-      "A London-based food-ordering storefront serving authentic British cuisine, built on the multi-tenant NewKommerce platform — a Puck-driven homepage, Typesense-powered menu filtering, add-to-cart, product offers, dual-gateway checkout (Stripe + Razorpay) and real-time order updates over WebSocket, on a fast, SEO-friendly Next.js front end.",
-    tech: ["Next.js", "React", "TypeScript", "Redux Toolkit", "TanStack Query", "Typesense", "Stripe", "Razorpay", "Puck", "WebSocket", "Tailwind CSS"],
+      "A London-based food-ordering storefront serving authentic British cuisine, built on the multi-tenant NewKommerce platform — a Puck-driven homepage, Typesense-powered menu filtering, add-to-cart, product offers, dual-gateway checkout (Stripe + Razorpay) and real-time order updates over MQTT, on a fast, SEO-friendly Next.js front end.",
+    tech: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Typesense", "Stripe", "Razorpay", "Puck", "MQTT", "Tailwind CSS"],
     image: "/projects/paris-home.png",
     shots: [
       { label: "listing", src: "/projects/paris-listing.png" },
@@ -137,7 +137,7 @@ export const projects: Project[] = [
     tint: "indigo",
     overview: {
       summary:
-        "A London-based food-ordering storefront serving authentic British cuisine, built on the multi-tenant NewKommerce platform (one env-driven codebase powering several brands). As part of a 3-person frontend team I built the Puck-driven homepage and About page, Typesense filtering on the product listing, the add-to-cart flow and product offers, dual-gateway checkout with Stripe and Razorpay, and real-time order-status updates over WebSocket.",
+        "A London-based food-ordering storefront serving authentic British cuisine, built on the multi-tenant NewKommerce platform (one env-driven codebase powering several brands). As part of a 3-person frontend team I built the Puck-driven homepage and About page, Typesense filtering on the product listing, the add-to-cart flow and product offers, dual-gateway checkout with Stripe and Razorpay, and real-time order-status updates over MQTT.",
       role: "Frontend Developer · 3-person frontend team",
       timeline: "2024 · 3Embed (NewKommerce)",
       platform: "NewKommerce multi-tenant SaaS",
@@ -145,15 +145,15 @@ export const projects: Project[] = [
         "Puck-driven homepage and About page — reusable blocks the content team edits without code.",
         "Typesense instant, typo-tolerant filtering on the menu/product listing.",
         "Add-to-cart flow and product offers/discounts on a shared Redux cart layer.",
-        "Dual-gateway checkout (Stripe global + Razorpay India UPI) with real-time order status over WebSocket.",
+        "Dual-gateway checkout (Stripe global + Razorpay India UPI) with real-time order status over MQTT.",
       ],
       features: [
         { title: "Homepage (Puck)", body: "Visual page builder with reusable blocks — content editable without code, SSG + ISR for speed and SEO." },
         { title: "Menu & filters", body: "Typesense-powered instant, typo-tolerant filtering across categories, price and attributes." },
         { title: "Cart & offers", body: "Add-to-cart with quantity/variants and product offers applied through a shared Redux slice." },
-        { title: "Checkout & real-time", body: "Stripe + Razorpay payments, with live order-status updates pushed over WebSocket." },
+        { title: "Checkout & real-time", body: "Stripe + Razorpay payments, with live order-status updates pushed over MQTT." },
       ],
-      stack: ["Next.js", "React", "TypeScript", "Redux Toolkit", "TanStack Query", "Typesense", "Stripe", "Razorpay", "Puck", "WebSocket", "Tailwind CSS", "SSG / ISR"],
+      stack: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Typesense", "Stripe", "Razorpay", "Puck", "MQTT", "Tailwind CSS", "SSG / ISR"],
     },
   },
   {
