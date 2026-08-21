@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { site, experience, skillCategories, projects, stats } from "@/lib/data";
+import { useUIStore } from "@/lib/store/ui";
 
 /* ------------------------------------------------------------------ */
 /* AskAnubhav — portfolio assistant. Talks to /api/chat (Groq, free    */
@@ -82,8 +84,10 @@ function answer(raw: string): string {
 }
 
 export function ChatBot() {
-  const [open, setOpen] = useState(false);
-  const [typing, setTyping] = useState(false);
+  // Chat panel open/close lives in the global Zustand UI store.
+  const open = useUIStore((s) => s.chatOpen);
+  const toggleChat = useUIStore((s) => s.toggleChat);
+  const closeChat = useUIStore((s) => s.closeChat);
   const [input, setInput] = useState("");
   const [msgs, setMsgs] = useState<Msg[]>([
     { from: "bot", text: "Hi, I'm Anubhav's assistant 👋 Ask me anything about his work — or tap a question below." },
@@ -91,6 +95,23 @@ export function ChatBot() {
   const listRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
+
+  // TanStack Query mutation — POSTs the conversation to /api/chat and exposes
+  // request/loading/error state (isPending drives the typing indicator).
+  const chat = useMutation({
+    mutationFn: async (history: Msg[]): Promise<string> => {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: history.map((m) => ({ role: m.from === "user" ? "user" : "assistant", content: m.text })),
+        }),
+      });
+      if (!res.ok) throw new Error("chat_unavailable");
+      return (await res.json()).reply ?? "";
+    },
+  });
+  const typing = chat.isPending;
 
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
@@ -102,10 +123,10 @@ export function ChatBot() {
     const onDown = (e: MouseEvent) => {
       const t = e.target as Node;
       if (panelRef.current?.contains(t) || btnRef.current?.contains(t)) return;
-      setOpen(false);
+      closeChat();
     };
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") closeChat();
     };
     document.addEventListener("mousedown", onDown);
     document.addEventListener("keydown", onKey);
@@ -115,39 +136,25 @@ export function ChatBot() {
     };
   }, [open]);
 
-  const send = async (text: string) => {
+  const send = (text: string) => {
     const clean = text.trim();
     if (!clean || typing) return;
     const history = [...msgs, { from: "user" as const, text: clean }];
     setMsgs(history);
     setInput("");
-    setTyping(true);
 
-    let reply = "";
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: history.map((m) => ({ role: m.from === "user" ? "user" : "assistant", content: m.text })),
-        }),
-      });
-      if (res.ok) reply = (await res.json()).reply ?? "";
-    } catch {
-      /* fall through to offline answer */
-    }
-    // Offline fallback when there's no API key or the request failed.
-    if (!reply) reply = answer(clean);
-
-    setMsgs((m) => [...m, { from: "bot", text: reply }]);
-    setTyping(false);
+    chat.mutate(history, {
+      // Use the AI reply when available, else fall back to the offline answer().
+      onSuccess: (reply) => setMsgs((m) => [...m, { from: "bot", text: reply || answer(clean) }]),
+      onError: () => setMsgs((m) => [...m, { from: "bot", text: answer(clean) }]),
+    });
   };
 
   return (
     <>
       <button
         ref={btnRef}
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => toggleChat()}
         aria-label={open ? "Close chat" : "Chat with Anubhav's assistant"}
         aria-expanded={open}
         className="fixed bottom-7 right-7 z-40 flex size-13 items-center justify-center rounded-full bg-gradient-to-br from-indigo to-cyan text-white shadow-lg shadow-indigo/30 transition-transform hover:scale-105"

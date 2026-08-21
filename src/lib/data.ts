@@ -31,7 +31,7 @@ export const about = {
 
 /* ---- Key achievements (kept honest — drawn from real project work) ---- */
 export const achievements = [
-  "Contributed to 3 production storefronts spanning e-commerce, B2B and food-ordering at 3Embed, built on Next.js, React and TypeScript.",
+  "Contributed to 6 production storefronts spanning social + live commerce, e-commerce, B2B and food-ordering at 3Embed, built on Next.js, React and Redux.",
   "Integrated payment gateways — Stripe and Razorpay — into production checkout flows.",
   "Built real-time features including MQTT order updates and LiveKit live-shopping streams.",
   "Focused on performance and SEO — Core Web Vitals, static generation, structured data and dynamic sitemaps.",
@@ -46,7 +46,7 @@ export const experience = [
     period: "Oct 2022 — Present",
     location: "Surat · On-site",
     points: [
-      "Built and maintained the frontend for 3 production commerce storefronts (food-ordering, B2B gifting and a membership marketplace) on 3Embed's multi-tenant Next.js platform, as part of a small frontend team.",
+      "Built and maintained the frontend for 6 production commerce storefronts — social + live selling, food-ordering, B2B gifting and a membership marketplace — on 3Embed's multi-tenant Next.js platforms, as part of a small frontend team.",
       "Improved performance and SEO via static generation, code-splitting, structured data and dynamic sitemaps.",
       "Built reusable component libraries, Redux Toolkit state and type-safe forms shared across storefronts, keeping the UI consistent and reducing duplicate work.",
       "Integrated payment gateways (Stripe, Razorpay), Typesense/Algolia instant search, MQTT real-time order updates, live shopping and Puck-based CMS builders.",
@@ -82,12 +82,13 @@ export const skillHighlights = {
 };
 
 export const skillCategories = [
-  { title: "Frontend & frameworks", icon: "code", pills: ["React", "Next.js (App + Pages Router)", "Server Components", "TypeScript", "JavaScript ES6+", "HTML5", "CSS3"] },
-  { title: "State & data", icon: "data", pills: ["Redux Toolkit", "Redux-Saga", "Context API", "Zod"] },
-  { title: "Styling & UI", icon: "paint", pills: ["Tailwind CSS", "Radix UI", "Framer Motion"] },
-  { title: "Commerce & search", icon: "cart", pills: ["Stripe", "Razorpay", "Apple Pay", "Google Pay", "Typesense", "Algolia", "Puck CMS", "i18next"] },
-  { title: "Real-time & media", icon: "wifi", pills: ["MQTT", "WebSockets", "LiveKit"] },
-  { title: "Backend & tooling", icon: "server", pills: ["Node.js", "REST APIs", "Git", "ESLint", "Prettier", "Docker", "Vercel", "Sentry", "GrowthBook"] },
+  { title: "Frontend & frameworks", icon: "code", pills: ["React", "Next.js (Pages + App Router)", "Server Components", "TypeScript", "JavaScript ES6+", "HTML5", "CSS3"] },
+  { title: "State & data", icon: "data", pills: ["Redux Toolkit", "Redux-Saga", "RxJS", "TanStack Query", "Zustand", "Context API", "Zod"] },
+  { title: "Styling & UI", icon: "paint", pills: ["Tailwind CSS", "shadcn/ui", "Radix UI", "Material-UI", "styled-components", "SCSS/Sass", "Framer Motion", "Swiper"] },
+  { title: "Commerce & search", icon: "cart", pills: ["Stripe", "Razorpay", "Typesense", "Puck CMS", "Builder.io", "i18next"] },
+  { title: "Real-time & media", icon: "wifi", pills: ["LiveKit", "MQTT", "WebSockets"] },
+  { title: "Auth & backend", icon: "server", pills: ["Google / Facebook OAuth", "Firebase", "JWT", "Node.js", "REST APIs"] },
+  { title: "Tooling & DevOps", icon: "shield", pills: ["Git", "ESLint", "Prettier", "Husky", "Docker", "Bitbucket Pipelines"] },
   { title: "AI-assisted", icon: "rocket", pills: ["Cursor", "Claude", "GitHub Copilot"] },
 ];
 
@@ -195,13 +196,49 @@ export const projects: Project[] = [
     },
   },
   {
+    name: "Ideal",
+    url: "https://idealonline.app/",
+    category: "Social + live commerce",
+    kind: "video & live-selling marketplace",
+    description:
+      "A US social + live-selling marketplace — buy and sell from brands and users, sell live and sell via video. Built end-to-end by a 2-person frontend team; I owned the Social module (feed, stories, store profiles) and the LiveKit-powered Live-selling experience, on a multi-tenant base that also powers sibling white-label storefronts.",
+    tech: ["Next.js 12", "React", "JavaScript", "Redux-Saga", "Material-UI", "LiveKit", "Stripe", "Typesense", "MQTT"],
+    shots: [
+      { label: "social" },
+      { label: "live" },
+      { label: "product" },
+      { label: "profile" },
+    ],
+    tint: "violet",
+    overview: {
+      summary:
+        "Ideal is a US marketplace where brands and users buy, sell live, and sell via video. It runs on a multi-tenant base that also powers sibling white-label storefronts (Marchecentrale, Woenking). As part of a 2-person frontend team building the storefront end-to-end, I owned the Social module — the feed, stories and store profiles — and the Live-selling module built on LiveKit, and earlier did the first Stripe checkout integration plus PDP and homepage-responsiveness work on the shared base.",
+      role: "Frontend Developer · 2-person frontend team (end-to-end)",
+      timeline: "2023–2024 · 3Embed (multi-tenant marketplace)",
+      platform: "Multi-tenant base — Ideal + sibling storefronts",
+      highlights: [
+        "Social module — feed, stories and store profiles where users post and follow.",
+        "Live-selling module on LiveKit — real-time video streams where viewers shop.",
+        "One multi-tenant base powering Ideal plus sibling white-label storefronts.",
+        "First Stripe checkout integration, plus PDP and homepage-responsiveness work on the shared base.",
+      ],
+      features: [
+        { title: "Social feed & stories", body: "Feed, stories and posts on store profiles — the social side of the marketplace." },
+        { title: "Live selling (LiveKit)", body: "Real-time live video streams where sellers showcase and viewers shop." },
+        { title: "Shops, PLP & PDP", body: "Store listings and product pages on the shared multi-tenant base." },
+        { title: "Checkout (Stripe)", body: "Stripe-powered checkout — my first end-to-end payment integration." },
+      ],
+      stack: ["Next.js 12", "React", "JavaScript", "Redux-Saga", "Material-UI", "styled-components", "SCSS/Sass", "LiveKit", "Stripe", "Typesense", "MQTT", "Firebase"],
+    },
+  },
+  {
     name: "TrulyFree",
     url: "https://trulyfree.com/",
     category: "E-commerce",
     kind: "membership marketplace",
     description:
-      "Feature-rich commerce storefront with multi-gateway checkout (Stripe, Google Pay, Apple Pay), Algolia search, in-app chat, Gemini-powered assistance and GrowthBook feature flags. Redux-Saga data flow with Sentry monitoring for production reliability.",
-    tech: ["Next.js 12", "React 18", "Redux Saga", "Algolia", "Stripe", "Apple Pay", "Google Pay", "GrowthBook", "Sentry"],
+      "A large US membership marketplace. I joined the existing storefront team to migrate the social experience from v1 to v2 — reworking the social flow's UI and wiring it to updated APIs — and to build out the live-selling module, as part of a 5-person frontend team on a production codebase.",
+    tech: ["Next.js 12", "React 18", "Redux-Saga", "LiveKit", "REST APIs", "SCSS/Sass"],
     image: "/projects/truly-home.png",
     shots: [
       { label: "plp", src: "/projects/truly-shop.png" },
@@ -212,23 +249,21 @@ export const projects: Project[] = [
     tint: "cyan",
     overview: {
       summary:
-        "TrulyFree is a US marketplace for better, non-toxic products with a membership and cash-back model. Shoppers browse hundreds of brands and check out with express payments. I worked on the storefront front end as part of a 5-person frontend team — Redux-Saga data flow, Algolia search and multi-gateway express checkout, with Sentry monitoring in production.",
+        "TrulyFree is a large US membership marketplace for non-toxic products. I joined the existing storefront team to migrate the social experience from v1 to v2 — reworking the social flow's UI and wiring it to the updated v2 APIs — and to build out the live-selling module. Worked as part of a 5-person frontend team on a production Next.js / Redux-Saga codebase.",
       role: "Frontend Developer · 5-person frontend team",
       timeline: "2023–2024 · 3Embed (TrulyFree)",
       platform: "TrulyFree marketplace",
       highlights: [
-        "Membership + cash-back pricing shown across listings, cart and checkout.",
-        "Express multi-gateway checkout — Apple Pay, Google Pay and card.",
-        "In-app chat and Gemini-powered shopping assistance for support.",
-        "Algolia instant search with rich filters (badges, price, shipping).",
+        "Migrated the social experience from v1 to v2 — UI rework plus updated API integration.",
+        "Built out the live-selling module on the storefront.",
+        "Worked within an established 5-person frontend team on a large production codebase.",
       ],
       features: [
-        { title: "Shop & filters", body: "Category listings with badge, price and shipping filters, Algolia-powered." },
-        { title: "Product pages", body: "Bundles, member vs non-member pricing and cash-back, add-to-cart." },
-        { title: "Account & rewards", body: "Order history, referrals and cash-back tracked in the member account." },
-        { title: "Checkout", body: "Express Apple Pay / Google Pay plus contact and shipping, with an order summary." },
+        { title: "Social v2", body: "Rebuilt the social flow's UI and connected it to the updated v2 APIs." },
+        { title: "Live selling", body: "Contributed the live-selling module — real-time video shopping on the storefront." },
+        { title: "Production storefront", body: "Feature and UI work across a large, live US marketplace." },
       ],
-      stack: ["Next.js 12", "React 18", "Redux-Saga", "Algolia", "Stripe", "Apple Pay", "Google Pay", "GrowthBook", "Sentry"],
+      stack: ["Next.js 12", "React 18", "Redux-Saga", "LiveKit", "REST APIs", "SCSS/Sass"],
     },
     // tint kept in the indigo/cyan family for a consistent, symmetric palette
   },
@@ -236,9 +271,9 @@ export const projects: Project[] = [
 
 export const stats = [
   { value: 3, suffix: "+", label: "Years experience" },
-  { value: 3, suffix: "", label: "Production storefronts" },
+  { value: 6, suffix: "", label: "Production storefronts" },
   { value: 2, suffix: "", label: "Payment gateways" },
-  { value: 4, suffix: "", label: "Search & real-time integrations" },
+  { value: 4, suffix: "", label: "Real-time & search stacks" },
 ];
 
 // No fabricated testimonials or articles — add real ones here when you have them,

@@ -1,25 +1,32 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "outline";
+/**
+ * shadcn/ui-style button. Variants are described with `cva` and merged with
+ * `cn` (clsx + tailwind-merge). Colours come from the .btn-primary /
+ * .btn-outline CSS classes (driven by the BRAND theme tokens), so the whole
+ * site restyles from one place. Renders an <a> when `href` is set.
+ */
+export const buttonVariants = cva(
+  "inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo/60 disabled:pointer-events-none disabled:opacity-60",
+  {
+    variants: {
+      variant: {
+        primary: "btn-primary",
+        outline: "btn-outline",
+      },
+    },
+    defaultVariants: { variant: "primary" },
+  },
+);
 
-const variantClass: Record<Variant, string> = {
-  primary: "btn-primary",
-  outline: "btn-outline",
-};
-
-const base = "inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold";
-
-type CommonProps = { variant?: Variant; className?: string; children: ReactNode };
+type CommonProps = VariantProps<typeof buttonVariants> & { className?: string; children: ReactNode };
 type ButtonAsButton = CommonProps & ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined };
 type ButtonAsAnchor = CommonProps & AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
 
-/**
- * Themeable action button. Renders an <a> when `href` is set, otherwise a
- * <button>. Colours come from the .btn-primary / .btn-outline CSS classes
- * (driven by the BRAND theme tokens), so the whole site restyles from one place.
- */
-export function Button({ variant = "primary", className = "", children, ...rest }: ButtonAsButton | ButtonAsAnchor) {
-  const cls = `${base} ${variantClass[variant]} ${className}`.trim();
+export function Button({ variant, className, children, ...rest }: ButtonAsButton | ButtonAsAnchor) {
+  const cls = cn(buttonVariants({ variant }), className);
 
   if ("href" in rest && rest.href !== undefined) {
     return (
