@@ -198,40 +198,10 @@ button:disabled { cursor: not-allowed; }
   margin-left: 8px; flex: 1; font-family: var(--font-mono); font-size: 11px; color: var(--muted);
   background: rgba(0, 0, 0, 0.3); padding: 5px 12px; border-radius: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.shot-img { aspect-ratio: 16 / 9.4; width: 100%; object-fit: cover; object-position: top; display: block; background: #0d0d15; cursor: zoom-in; }
+.shot-btn { display: block; width: 100%; padding: 0; margin: 0; border: 0; background: none; cursor: zoom-in; }
+.shot-btn:focus-visible { outline: 2px solid var(--indigo, #6366f1); outline-offset: 2px; }
+.shot-img { aspect-ratio: 16 / 9.4; width: 100%; object-fit: cover; object-position: top; display: block; background: #0d0d15; }
 .shot-ph { aspect-ratio: 16 / 9.4; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--muted); background: var(--tint-b, linear-gradient(160deg, #141537, #0b0b18)); }
-/* ---- Thumbnail carousel ---- */
-.thumb-carousel { position: relative; }
-.thumb-strip {
-  display: flex; gap: 9px;
-  overflow-x: auto; scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-.thumb-strip::-webkit-scrollbar { display: none; }
-/* Show 4 thumbs per view; anything beyond scrolls via the arrows. */
-.thumb-slot, .thumb-img { flex: 0 0 calc((100% - 27px) / 4); min-width: 0; scroll-snap-align: start; }
-.thumb-img { transition: transform 0.25s, box-shadow 0.25s; }
-.thumb-img:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.5); }
-.thumb-arrow {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  display: grid; place-items: center;
-  width: 30px; height: 30px; border-radius: 999px; z-index: 2;
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
-  color: var(--ink); border: 1px solid var(--line);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.4);
-  transition: opacity 0.2s, transform 0.15s, background 0.2s;
-}
-.thumb-arrow { cursor: pointer; }
-.thumb-arrow:hover { background: var(--bg); transform: translateY(-50%) scale(1.08); }
-.thumb-arrow.prev { left: -8px; }
-.thumb-arrow.next { right: -8px; }
-.thumb-arrow[data-hidden="true"] { opacity: 0; pointer-events: none; }
-.thumb-slot { aspect-ratio: 4 / 3; border-radius: 9px; border: 1px dashed rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.03); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; transition: 0.25s; }
-.thumb-slot:hover { border-color: #6366f1; background: rgba(99, 102, 241, 0.06); }
-.thumb-slot .t { font-size: 9.5px; color: var(--muted); font-family: var(--font-mono); letter-spacing: 0.03em; }
-.thumb-img { aspect-ratio: 4 / 3; object-fit: cover; object-position: top; border-radius: 9px; border: 1px solid var(--line); cursor: zoom-in; }
 .lightbox { position: fixed; inset: 0; z-index: 60; background: rgba(4, 4, 8, 0.94); backdrop-filter: blur(6px); display: flex; align-items: flex-start; justify-content: center; padding: 24px; overflow-y: auto; overscroll-behavior: contain; cursor: zoom-out; }
 @media (min-width: 768px) { .lightbox { padding: 40px; } }
 .lightbox-figure { display: flex; flex-direction: column; align-items: center; gap: 12px; width: min(1000px, 100%); max-width: 100%; margin: auto; cursor: default; }
@@ -318,10 +288,11 @@ button:disabled { cursor: not-allowed; }
 
 /* ---- Overview image slider ---- */
 .macwin-slider { position: relative; border-bottom: 1px solid var(--line); background: #0d0d15; }
+.macwin-slide-btn { display: block; width: 100%; padding: 0; margin: 0; border: 0; background: none; cursor: zoom-in; }
+.macwin-slide-btn:focus-visible { outline: 2px solid var(--indigo, #6366f1); outline-offset: -2px; }
 .macwin-slide {
   width: 100%; display: block;
   aspect-ratio: 16 / 8.6; object-fit: cover; object-position: top;
-  cursor: zoom-in;
 }
 .macwin-nav {
   position: absolute; top: 50%; transform: translateY(-50%);
