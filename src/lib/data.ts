@@ -31,7 +31,7 @@ export const about = {
 
 /* ---- Key achievements (kept honest — drawn from real project work) ---- */
 export const achievements = [
-  "Contributed to 4+ production storefronts spanning e-commerce, B2B and food-ordering at 3Embed, built on Next.js, React and TypeScript.",
+  "Contributed to 3 production storefronts spanning e-commerce, B2B and food-ordering at 3Embed, built on Next.js, React and TypeScript.",
   "Integrated payment gateways — Stripe and Razorpay — into production checkout flows.",
   "Built real-time features including MQTT order updates and LiveKit live-shopping streams.",
   "Focused on performance and SEO — Core Web Vitals, static generation, structured data and dynamic sitemaps.",
@@ -46,9 +46,9 @@ export const experience = [
     period: "Oct 2022 — Present",
     location: "Surat · On-site",
     points: [
-      "Built and maintained 4+ production e-commerce storefronts for global clients using Next.js, React and TypeScript.",
-      "Improved performance & SEO — raised Lighthouse / Core Web Vitals scores by ~40% via static generation, code-splitting, structured data and dynamic sitemaps.",
-      "Architected Redux Toolkit state, type-safe forms and reusable component libraries, cutting repeat UI work by ~30% across projects.",
+      "Built and maintained the frontend for 3 production commerce storefronts (food-ordering, B2B gifting and a membership marketplace) on 3Embed's multi-tenant Next.js platform, as part of a small frontend team.",
+      "Improved performance and SEO via static generation, code-splitting, structured data and dynamic sitemaps.",
+      "Built reusable component libraries, Redux Toolkit state and type-safe forms shared across storefronts, keeping the UI consistent and reducing duplicate work.",
       "Integrated payment gateways (Stripe, Razorpay), Typesense/Algolia instant search, MQTT real-time order updates, live shopping and Puck-based CMS builders.",
       "Built end-to-end commerce flows — hamper builders and product customization — and extended React admin panels with self-serve modules for customization pricing and options, so business teams manage them without developer changes.",
     ],
@@ -82,14 +82,13 @@ export const skillHighlights = {
 };
 
 export const skillCategories = [
-  { title: "Frontend & frameworks", icon: "code", pills: ["React 19", "Next.js", "App Router", "Server Components", "TypeScript", "JavaScript ES6+", "HTML5", "CSS3"] },
-  { title: "State & data", icon: "data", pills: ["Redux Toolkit", "Redux-Saga", "Zustand", "Context API", "RxJS", "React Hook Form", "Zod"] },
-  { title: "Styling & UI", icon: "paint", pills: ["Tailwind CSS", "Material-UI", "Emotion", "styled-components", "Radix UI", "Framer Motion", "Swiper", "SCSS/Sass"] },
-  { title: "Commerce & search", icon: "cart", pills: ["Stripe", "Razorpay", "Google Pay", "Apple Pay", "Algolia", "Typesense", "Puck CMS", "i18next"] },
-  { title: "Real-time & media", icon: "wifi", pills: ["MQTT", "WebSockets", "LiveKit", "Socket.IO"] },
-  { title: "Backend & auth", icon: "server", pills: ["Node.js", "REST APIs", "GraphQL", "NextAuth", "Firebase"] },
-  { title: "Testing & tooling", icon: "shield", pills: ["Jest", "Playwright", "Vitest", "Storybook", "ESLint", "Prettier", "Husky", "Git"] },
-  { title: "DevOps & AI-assisted", icon: "rocket", pills: ["Docker", "Vercel", "GitHub Actions", "Sentry", "GrowthBook", "Cursor", "Claude", "Copilot"] },
+  { title: "Frontend & frameworks", icon: "code", pills: ["React", "Next.js (App + Pages Router)", "Server Components", "TypeScript", "JavaScript ES6+", "HTML5", "CSS3"] },
+  { title: "State & data", icon: "data", pills: ["Redux Toolkit", "Redux-Saga", "Context API", "Zod"] },
+  { title: "Styling & UI", icon: "paint", pills: ["Tailwind CSS", "Radix UI", "Framer Motion"] },
+  { title: "Commerce & search", icon: "cart", pills: ["Stripe", "Razorpay", "Apple Pay", "Google Pay", "Typesense", "Algolia", "Puck CMS", "i18next"] },
+  { title: "Real-time & media", icon: "wifi", pills: ["MQTT", "WebSockets", "LiveKit"] },
+  { title: "Backend & tooling", icon: "server", pills: ["Node.js", "REST APIs", "Git", "ESLint", "Prettier", "Docker", "Vercel", "Sentry", "GrowthBook"] },
+  { title: "AI-assisted", icon: "rocket", pills: ["Cursor", "Claude", "GitHub Copilot"] },
 ];
 
 export type ProjectShot = { label: string; src?: string };
@@ -237,9 +236,9 @@ export const projects: Project[] = [
 
 export const stats = [
   { value: 3, suffix: "+", label: "Years experience" },
-  { value: 4, suffix: "+", label: "Commerce platforms" },
-  { value: 30, suffix: "+", label: "Technologies" },
-  { value: 4, suffix: "+", label: "Payment gateways" },
+  { value: 3, suffix: "", label: "Production storefronts" },
+  { value: 2, suffix: "", label: "Payment gateways" },
+  { value: 4, suffix: "", label: "Search & real-time integrations" },
 ];
 
 // No fabricated testimonials or articles — add real ones here when you have them,

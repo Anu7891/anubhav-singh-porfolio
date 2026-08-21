@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import Image from "next/image";
 import { SectionHeader } from "../ui/SectionHeader";
 import { Reveal } from "../ui/Reveal";
 import { Section } from "../ui/Section";
@@ -25,13 +26,6 @@ function ImgIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} width={24} height={24} aria-hidden="true">
       <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 15l5-5 4 4 3-3 6 6" strokeLinecap="round" strokeLinejoin="round" /><circle cx="8.5" cy="8.5" r="1.5" />
-    </svg>
-  );
-}
-function PlusIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} width={16} height={16} aria-hidden="true">
-      <path d="M12 5v14M5 12h14" strokeLinecap="round" />
     </svg>
   );
 }
@@ -61,8 +55,21 @@ function Visual({ p, onOpen }: { p: Project; onOpen: (src: string, label: string
           <span className="browser-url">{host(p.url)}</span>
         </div>
         {p.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img className="shot-img" src={p.image} alt={`${p.name} — homepage screenshot`} title={`${p.name} — Homepage`} loading="lazy" onClick={() => onOpen(p.image!, "Homepage")} />
+          <button
+            type="button"
+            className="shot-btn"
+            onClick={() => onOpen(p.image!, "Homepage")}
+            aria-label={`Enlarge ${p.name} homepage screenshot`}
+          >
+            <Image
+              className="shot-img"
+              src={p.image}
+              alt={`${p.name} — homepage screenshot`}
+              width={1280}
+              height={752}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </button>
         ) : (
           <div className="shot-ph">
             <span className="grid size-11 place-items-center rounded-xl border border-line bg-white/5">
@@ -73,73 +80,6 @@ function Visual({ p, onOpen }: { p: Project; onOpen: (src: string, label: string
           </div>
         )}
       </div>
-      <ThumbCarousel p={p} onOpen={onOpen} />
-    </div>
-  );
-}
-
-function ChevronIcon({ dir }: { dir: "left" | "right" }) {
-  return (
-    <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="currentColor" strokeWidth={2.2} aria-hidden="true">
-      <path d={dir === "left" ? "M15 6l-6 6 6 6" : "M9 6l6 6-6 6"} strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function ThumbCarousel({ p, onOpen }: { p: Project; onOpen: (src: string, label: string) => void }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
-
-  const update = () => {
-    const el = ref.current;
-    if (!el) return;
-    setAtStart(el.scrollLeft <= 2);
-    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
-  };
-
-  useEffect(() => {
-    update();
-    const el = ref.current;
-    if (!el) return;
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const scroll = (dir: number) => {
-    const el = ref.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: "smooth" });
-  };
-
-  const showArrows = p.shots.filter((s) => s.src).length > 4;
-
-  return (
-    <div className="thumb-carousel">
-      <div className="thumb-strip" ref={ref} onScroll={update}>
-        {p.shots.map((s, i) =>
-          s.src ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={i} className="thumb-img" src={s.src} alt={`${p.name} — ${s.label}`} title={prettyLabel(s.label)} loading="lazy" onClick={() => onOpen(s.src!, prettyLabel(s.label))} />
-          ) : (
-            <div key={i} className="thumb-slot" title={`Add ${s.label} screenshot`}>
-              <PlusIcon />
-              <span className="t">{s.label}</span>
-            </div>
-          ),
-        )}
-      </div>
-      {showArrows ? (
-        <>
-          <button type="button" className="thumb-arrow prev" data-hidden={atStart} aria-label="Previous thumbnails" onClick={() => scroll(-1)}>
-            <ChevronIcon dir="left" />
-          </button>
-          <button type="button" className="thumb-arrow next" data-hidden={atEnd} aria-label="More thumbnails" onClick={() => scroll(1)}>
-            <ChevronIcon dir="right" />
-          </button>
-        </>
-      ) : null}
     </div>
   );
 }
@@ -193,8 +133,10 @@ function Slider({ slides, alt, onOpen }: { slides: Slide[]; alt: string; onOpen:
   if (n === 0) return null;
   return (
     <div className="macwin-slider">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="macwin-slide" src={slides[i].src} alt={`${alt} — ${slides[i].label}`} onClick={() => onOpen(slides[i].src, slides[i].label)} />
+      <button type="button" className="macwin-slide-btn" onClick={() => onOpen(slides[i].src, slides[i].label)} aria-label={`Enlarge ${slides[i].label}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="macwin-slide" src={slides[i].src} alt={`${alt} — ${slides[i].label}`} />
+      </button>
       <span className="macwin-label">{slides[i].label}</span>
       {n > 1 ? (
         <>
@@ -218,13 +160,40 @@ function Slider({ slides, alt, onOpen }: { slides: Slide[]; alt: string; onOpen:
 
 function ProjectModal({ p, onClose, onOpenImage }: { p: Project; onClose: () => void; onOpenImage: (src: string, label: string) => void }) {
   const o = p.overview!;
+  const winRef = useRef<HTMLDivElement>(null);
   const gallery: Slide[] = [
     ...(p.image ? [{ src: p.image, label: "Homepage" }] : []),
     ...p.shots.flatMap((s) => (s.src ? [{ src: s.src, label: prettyLabel(s.label) }] : [])),
   ];
+
+  // Move focus into the dialog on open and keep Tab within it.
+  useEffect(() => {
+    const win = winRef.current;
+    if (!win) return;
+    const focusables = () =>
+      Array.from(win.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),input,textarea,[tabindex]:not([tabindex="-1"])'));
+    focusables()[0]?.focus();
+    const onTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    win.addEventListener("keydown", onTab);
+    return () => win.removeEventListener("keydown", onTab);
+  }, []);
+
   return (
     <div className="macwin-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-label={`${p.name} — project overview`}>
-      <div className="macwin" onClick={(e) => e.stopPropagation()}>
+      <div className="macwin" ref={winRef} onClick={(e) => e.stopPropagation()}>
         {/* Title bar with macOS traffic lights */}
         <div className="macwin-bar">
           <div className="macwin-lights">
@@ -315,6 +284,17 @@ export function Projects() {
   const [zoom, setZoom] = useState<Slide | null>(null);
   const [active, setActive] = useState<Project | null>(null);
   const openZoom = (src: string, label: string) => setZoom({ src, label });
+  const restoreRef = useRef<HTMLElement | null>(null);
+
+  // Remember what was focused before any overlay opened, and restore it on close.
+  useEffect(() => {
+    if (active || zoom) {
+      if (!restoreRef.current) restoreRef.current = document.activeElement as HTMLElement;
+    } else if (restoreRef.current) {
+      restoreRef.current.focus?.();
+      restoreRef.current = null;
+    }
+  }, [active, zoom]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -364,7 +344,7 @@ export function Projects() {
 
       {zoom ? (
         <div className="lightbox" onClick={() => setZoom(null)} role="dialog" aria-modal="true" aria-label={`Enlarged — ${zoom.label}`}>
-          <button type="button" className="lightbox-close" aria-label="Close preview" onClick={() => setZoom(null)}>
+          <button type="button" className="lightbox-close" aria-label="Close preview" autoFocus onClick={() => setZoom(null)}>
             <svg viewBox="0 0 24 24" width={20} height={20} fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
             </svg>
