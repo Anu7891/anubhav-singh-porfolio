@@ -10,7 +10,7 @@ const url = "https://anubhav-singh-porfolio.vercel.app";
 // Title ~52 chars and description ~150 chars — both inside Google's display limits.
 const title = "Anubhav Singh — Frontend Developer | React & Next.js";
 const description =
-  "Frontend developer — React, Next.js & TypeScript. 3+ years at 3Embed building fast, SEO-friendly commerce storefronts: Qykly, Paris Panini, TrulyFree.";
+  "Frontend developer — React, Next.js & TypeScript. 3+ years at 3Embed building fast, SEO-friendly commerce storefronts: Qykly, Paris Panini, TrulyFree, Ideal.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(url),

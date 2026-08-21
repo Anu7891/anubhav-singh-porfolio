@@ -118,7 +118,7 @@ export type Project = {
   overview?: ProjectOverview;
 };
 
-export const projects: Project[] = [
+const projectList: Project[] = [
   {
     name: "Paris Panini",
     url: "https://parispanniblr.newkommerce.com/",
@@ -268,6 +268,12 @@ export const projects: Project[] = [
     // tint kept in the indigo/cyan family for a consistent, symmetric palette
   },
 ];
+
+// Display order for the Projects section — edit this list to reorder.
+const projectOrder = ["Qykly", "Paris Panini", "TrulyFree", "Ideal"];
+export const projects: Project[] = projectOrder
+  .map((n) => projectList.find((p) => p.name === n))
+  .filter((p): p is Project => Boolean(p));
 
 export const stats = [
   { value: 3, suffix: "+", label: "Years experience" },
